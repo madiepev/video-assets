@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monthly Weather & Ice Cream Sales Calendar</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #8e8e93, #636366);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .calendar-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        .calendar-header {
+            background: linear-gradient(135deg, #8dc8e8, #0078d4);
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .calendar-header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .calendar-header p {
+            margin: 10px 0 0 0;
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 1px;
+            background: #ddd;
+            padding: 1px;
+        }
+
+        .day-header {
+            background: #2d3436;
+            color: white;
+            padding: 15px 10px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .day-cell {
+            background: white;
+            padding: 15px 8px;
+            min-height: 120px;
+            position: relative;
+            transition: transform 0.2s ease;
+        }
+
+        .day-cell:hover {
+            transform: scale(1.02);
+            z-index: 1;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .day-number {
+            font-weight: bold;
+            font-size: 1.5em;
+            color: #2d3436;
+            margin-bottom: 8px;
+        }
+
+        .weather-info {
+            font-size: 1.1em;
+            line-height: 1.4;
+        }
+
+        .temperature {
+            color: #ff5c39;
+            display: flex;
+            align-items: center;
+            margin-bottom: 3px;
+        }
+
+        .rainfall {
+            color: #0078d4;
+            display: flex;
+            align-items: center;
+            margin-bottom: 3px;
+        }
+
+        .ice-cream {
+            color: #c73ecc;
+            display: flex;
+            align-items: center;
+        }
+
+        .icon {
+            margin-right: 5px;
+            width: 16px;
+            height: 16px;
+            display: inline-block;
+            filter: brightness(0) saturate(100%);
+        }
+
+        .temperature .icon {
+            filter: brightness(0) saturate(100%) invert(45%) sepia(69%) saturate(4980%) hue-rotate(345deg) brightness(103%) contrast(101%);
+        }
+
+        .rainfall .icon {
+            filter: brightness(0) saturate(100%) invert(25%) sepia(87%) saturate(2930%) hue-rotate(207deg) brightness(96%) contrast(101%);
+        }
+
+        .ice-cream .icon {
+            filter: brightness(0) saturate(100%) invert(19%) sepia(82%) saturate(2270%) hue-rotate(297deg) brightness(98%) contrast(92%);
+        }
+
+        .rain-text {
+            font-weight: bold;
+            font-size: 12px;
+            text-align: center;
+            line-height: 16px;
+            width: 16px;
+            height: 16px;
+            display: inline-block;
+            margin-right: 5px;
+        }
+
+        .empty-day {
+            background: #f8f9fa;
+            color: #999;
+        }
+
+        .highlight-day {
+            background: linear-gradient(135deg, #ffa38b, #ff5c39);
+            border: 3px solid #f4364c;
+            animation: pulse 2s infinite;
+        }
+
+        .highlight-day .day-number {
+            color: white;
+            font-size: 1.4em;
+        }
+
+        .highlight-day .weather-info {
+            color: white;
+        }
+
+        .unknown-data {
+            color: #fff;
+            font-weight: bold;
+            background: rgba(244, 54, 76, 0.8);
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(244, 54, 76, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(244, 54, 76, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(244, 54, 76, 0); }
+        }
+
+        .legend {
+            padding: 20px;
+            background: #f8f9fa;
+            border-top: 1px solid #ddd;
+        }
+
+        .legend h3 {
+            margin-top: 0;
+            color: #2d3436;
+        }
+
+        .legend-items {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="calendar-container">
+        <div class="calendar-header">
+            <h1>June 2025</h1>
+        </div>
+        
+        <div class="calendar-grid">
+            <!-- Day headers -->
+            <div class="day-header">Sunday</div>
+            <div class="day-header">Monday</div>
+            <div class="day-header">Tuesday</div>
+            <div class="day-header">Wednesday</div>
+            <div class="day-header">Thursday</div>
+            <div class="day-header">Friday</div>
+            <div class="day-header">Saturday</div>
+            
+            <!-- Day 1 - Sunday -->
+            <div class="day-cell">
+                <div class="day-number">1</div>
+                <div class="weather-info">
+                    <div class="temperature"><img src="../table-graph/images/temperature.svg" class="icon" alt="Temperature">24°C</div>
+                    <div class="rainfall"><span class="rain-text">💧</span>2.3mm</div>
+                    <div class="ice-cream"><img src="../table-graph/images/icecream.svg" class="icon" alt="Ice cream">156 sales</div>
+                </div>
+            </div>
+            
+            <!-- Day 2 - Monday -->
+            <div class="day-cell">
+                <div class="day-number">2</div>
+                <div class="weather-info">
+                    <div class="temperature"><img src="../table-graph/images/temperature.svg" class="icon" alt="Temperature">27°C</div>
+                    <div class="rainfall"><span class="rain-text">💧</span>0.5mm</div>
+                    <div class="ice-cream"><img src="../table-graph/images/icecream.svg" class="icon" alt="Ice cream">203 sales</div>
+                </div>
+            </div>
+            
+            <!-- Day 3 - Tuesday -->
+            <div class="day-cell">
+                <div class="day-number">3</div>
+                <div class="weather-info">
+                    <div class="temperature"><img src="../table-graph/images/temperature.svg" class="icon" alt="Temperature">29°C</div>
+                    <div class="rainfall"><span class="rain-text">💧</span>0mm</div>
+                    <div class="ice-cream"><img src="../table-graph/images/icecream.svg" class="icon" alt="Ice cream">287 sales</div>
+                </div>
+            </div>
+            
+            <!-- Day 4 - Wednesday -->
+            <div class="day-cell">
+                <div class="day-number">4</div>
+                <div class="weather-info">
+                    <div class="temperature"><img src="../table-graph/images/temperature.svg" class="icon" alt="Temperature">31°C</div>
+                    <div class="rainfall"><span class="rain-text">💧</span>0mm</div>
+                    <div class="ice-cream"><img src="../table-graph/images/icecream.svg" class="icon" alt="Ice cream">342 sales</div>
+                </div>
+            </div>
+            
+            <!-- Day 5 - Thursday -->
+            <div class="day-cell">
+                <div class="day-number">5</div>
+                <div class="weather-info">
+                    <div class="temperature"><img src="../table-graph/images/temperature.svg" class="icon" alt="Temperature">28°C</div>
+                    <div class="rainfall"><span class="rain-text">💧</span>1.2mm</div>
+                    <div class="ice-cream"><img src="../table-graph/images/icecream.svg" class="icon" alt="Ice cream">219 sales</div>
+                </div>
+            </div>
+            
+            <!-- Day 6 - Friday -->
+            <div class="day-cell">
+                <div class="day-number">6</div>
+                <div class="weather-info">
+                    <div class="temperature"><img src="../table-graph/images/temperature.svg" class="icon" alt="Temperature">26°C</div>
+                    <div class="rainfall"><span class="rain-text">💧</span>3.1mm</div>
+                    <div class="ice-cream"><img src="../table-graph/images/icecream.svg" class="icon" alt="Ice cream">178 sales</div>
+                </div>
+            </div>
+            
+            <!-- Day 7 - Saturday -->
+            <div class="day-cell">
+                <div class="day-number">7</div>
+                <div class="weather-info">
+                    <div class="temperature"><img src="../table-graph/images/temperature.svg" class="icon" alt="Temperature">25°C</div>
+                    <div class="rainfall"><span class="rain-text">💧</span>4.7mm</div>
+                    <div class="ice-cream"><img src="../table-graph/images/icecream.svg" class="icon" alt="Ice cream">145 sales</div>
+                </div>
+            </div>
+            
+            <!-- Day 8 - Sunday -->
+            <div class="day-cell">
+                <div class="day-number">8</div>
+                <div class="weather-info">
+                    <div class="temperature"><img src="../table-graph/images/temperature.svg" class="icon" alt="Temperature">23°C</div>
+                    <div class="rainfall"><span class="rain-text">💧</span>6.2mm</div>
+                    <div class="ice-cream"><img src="../table-graph/images/icecream.svg" class="icon" alt="Ice cream">98 sales</div>
+                </div>
+            </div>
+            
+            <!-- Day 9 - Monday -->
+            <div class="day-cell">
+                <div class="day-number">9</div>
+                <div class="weather-info">
+                    <div class="temperature"><img src="../table-graph/images/temperature.svg" class="icon" alt="Temperature">25°C</div>
+                    <div class="rainfall"><span class="rain-text">💧</span>2.8mm</div>
+                    <div class="ice-cream"><img src="../table-graph/images/icecream.svg" class="icon" alt="Ice cream">167 sales</div>
+                </div>
+            </div>
+            
+            <!-- Day 10 - Tuesday -->
+            <div class="day-cell">
+                <div class="day-number">10</div>
+                <div class="weather-info">
+                    <div class="temperature"><img src="../table-graph/images/temperature.svg" class="icon" alt="Temperature">30°C</div>
+                    <div class="rainfall"><span class="rain-text">💧</span>0mm</div>
+                    <div class="ice-cream"><img src="../table-graph/images/icecream.svg" class="icon" alt="Ice cream">298 sales</div>
+                </div>
+            </div>
+            
+            <!-- Day 11 - Wednesday -->
+            <div class="day-cell">
+                <div class="day-number">11</div>
+                <div class="weather-info">
+                    <div class="temperature"><img src="../table-graph/images/temperature.svg" class="icon" alt="Temperature">32°C</div>
+                    <div class="rainfall"><span class="rain-text">💧</span>0mm</div>
+                    <div class="ice-cream"><img src="../table-graph/images/icecream.svg" class="icon" alt="Ice cream">376 sales</div>
+                </div>
+            </div>
+            
+            <!-- Day 12 - Thursday -->
+            <div class="day-cell">
+                <div class="day-number">12</div>
+                <div class="weather-info">
+                    <div class="temperature"><img src="../table-graph/images/temperature.svg" class="icon" alt="Temperature">33°C</div>
+                    <div class="rainfall"><span class="rain-text">💧</span>0mm</div>
+                    <div class="ice-cream"><img src="../table-graph/images/icecream.svg" class="icon" alt="Ice cream">412 sales</div>
+                </div>
+            </div>
+            
+            <!-- Day 13 - Friday -->
+            <div class="day-cell">
+                <div class="day-number">13</div>
+                <div class="weather-info">
+                    <div class="temperature"><img src="../table-graph/images/temperature.svg" class="icon" alt="Temperature">29°C</div>
+                    <div class="rainfall"><span class="rain-text">💧</span>1.5mm</div>
+                    <div class="ice-cream"><img src="../table-graph/images/icecream.svg" class="icon" alt="Ice cream">267 sales</div>
+                </div>
+            </div>
+            
+            <!-- Day 14 - Saturday -->
+            <div class="day-cell">
+                <div class="day-number">14</div>
+                <div class="weather-info">
+                    <div class="temperature"><img src="../table-graph/images/temperature.svg" class="icon" alt="Temperature">27°C</div>
+                    <div class="rainfall"><span class="rain-text">💧</span>2.9mm</div>
+                    <div class="ice-cream"><img src="../table-graph/images/icecream.svg" class="icon" alt="Ice cream">198 sales</div>
+                </div>
+            </div>
+            
+            <!-- Day 15 - Sunday -->
+            <div class="day-cell">
+                <div class="day-number">15</div>
+                <div class="weather-info">
+                    <div class="temperature"><img src="../table-graph/images/temperature.svg" class="icon" alt="Temperature">26°C</div>
+                    <div class="rainfall"><span class="rain-text">💧</span>3.6mm</div>
+                    <div class="ice-cream"><img src="../table-graph/images/icecream.svg" class="icon" alt="Ice cream">172 sales</div>
+                </div>
+            </div>
+            
+            <!-- Day 16 - Monday -->
+            <div class="day-cell">
+                <div class="day-number">16</div>
+                <div class="weather-info">
+                    <div class="temperature"><img src="../table-graph/images/temperature.svg" class="icon" alt="Temperature">28°C</div>
+                    <div class="rainfall"><span class="rain-text">💧</span>1.1mm</div>
+                    <div class="ice-cream"><img src="../table-graph/images/icecream.svg" class="icon" alt="Ice cream">234 sales</div>
+                </div>
+            </div>
+            
+            <!-- Day 17 - Tuesday -->
+            <div class="day-cell">
+                <div class="day-number">17</div>
+                <div class="weather-info">
+                    <div class="temperature"><img src="../table-graph/images/temperature.svg" class="icon" alt="Temperature">31°C</div>
+                    <div class="rainfall"><span class="rain-text">💧</span>0mm</div>
+                    <div class="ice-cream"><img src="../table-graph/images/icecream.svg" class="icon" alt="Ice cream">321 sales</div>
+                </div>
+            </div>
+            
+            <!-- Day 18 - Wednesday -->
+            <div class="day-cell">
+                <div class="day-number">18</div>
+                <div class="weather-info">
+                    <div class="temperature"><img src="../table-graph/images/temperature.svg" class="icon" alt="Temperature">34°C</div>
+                    <div class="rainfall"><span class="rain-text">💧</span>0mm</div>
+                    <div class="ice-cream"><img src="../table-graph/images/icecream.svg" class="icon" alt="Ice cream">445 sales</div>
+                </div>
+            </div>
+            
+            <!-- Day 19 - Thursday -->
+            <div class="day-cell">
+                <div class="day-number">19</div>
+                <div class="weather-info">
+                    <div class="temperature"><img src="../table-graph/images/temperature.svg" class="icon" alt="Temperature">35°C</div>
+                    <div class="rainfall"><span class="rain-text">💧</span>0mm</div>
+                    <div class="ice-cream"><img src="../table-graph/images/icecream.svg" class="icon" alt="Ice cream">498 sales</div>
+                </div>
+            </div>
+            
+            <!-- Day 20 - Friday -->
+            <div class="day-cell">
+                <div class="day-number">20</div>
+                <div class="weather-info">
+                    <div class="temperature"><img src="../table-graph/images/temperature.svg" class="icon" alt="Temperature">32°C</div>
+                    <div class="rainfall"><span class="rain-text">💧</span>0.8mm</div>
+                    <div class="ice-cream"><img src="../table-graph/images/icecream.svg" class="icon" alt="Ice cream">356 sales</div>
+                </div>
+            </div>
+            
+            <!-- Day 21 - Saturday -->
+            <div class="day-cell">
+                <div class="day-number">21</div>
+                <div class="weather-info">
+                    <div class="temperature"><img src="../table-graph/images/temperature.svg" class="icon" alt="Temperature">30°C</div>
+                    <div class="rainfall"><span class="rain-text">💧</span>2.4mm</div>
+                    <div class="ice-cream"><img src="../table-graph/images/icecream.svg" class="icon" alt="Ice cream">289 sales</div>
+                </div>
+            </div>
+            
+            <!-- Day 22 - Sunday -->
+            <div class="day-cell">
+                <div class="day-number">22</div>
+                <div class="weather-info">
+                    <div class="temperature"><img src="../table-graph/images/temperature.svg" class="icon" alt="Temperature">28°C</div>
+                    <div class="rainfall"><span class="rain-text">💧</span>3.7mm</div>
+                    <div class="ice-cream"><img src="../table-graph/images/icecream.svg" class="icon" alt="Ice cream">213 sales</div>
+                </div>
+            </div>
+            
+            <!-- Day 23 - Monday -->
+            <div class="day-cell">
+                <div class="day-number">23</div>
+                <div class="weather-info">
+                    <div class="temperature"><img src="../table-graph/images/temperature.svg" class="icon" alt="Temperature">26°C</div>
+                    <div class="rainfall"><span class="rain-text">💧</span>5.1mm</div>
+                    <div class="ice-cream"><img src="../table-graph/images/icecream.svg" class="icon" alt="Ice cream">156 sales</div>
+                </div>
+            </div>
+            
+            <!-- Day 24 - Tuesday -->
+            <div class="day-cell">
+                <div class="day-number">24</div>
+                <div class="weather-info">
+                    <div class="temperature"><img src="../table-graph/images/temperature.svg" class="icon" alt="Temperature">29°C</div>
+                    <div class="rainfall"><span class="rain-text">💧</span>1.9mm</div>
+                    <div class="ice-cream"><img src="../table-graph/images/icecream.svg" class="icon" alt="Ice cream">245 sales</div>
+                </div>
+            </div>
+            
+            <!-- Day 25 - Wednesday -->
+            <div class="day-cell">
+                <div class="day-number">25</div>
+                <div class="weather-info">
+                    <div class="temperature"><img src="../table-graph/images/temperature.svg" class="icon" alt="Temperature">33°C</div>
+                    <div class="rainfall"><span class="rain-text">💧</span>0mm</div>
+                    <div class="ice-cream"><img src="../table-graph/images/icecream.svg" class="icon" alt="Ice cream">387 sales</div>
+                </div>
+            </div>
+            
+            <!-- Day 26 - Today (Current date) -->
+            <div class="day-cell highlight-day">
+                <div class="day-number">26</div>
+                <div class="weather-info">
+                    <div class="temperature"><img src="../table-graph/images/temperature.svg" class="icon" alt="Temperature">31°C</div>
+                    <div class="rainfall"><span class="rain-text">💧</span>0.7mm</div>
+                    <div class="ice-cream"><span class="icon">❓</span><span class="unknown-data">DATA PENDING</span></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="legend">
+            <h3>Legend</h3>
+            <div class="legend-items">
+                <div class="legend-item">
+                    <img src="../table-graph/images/temperature.svg" class="icon" alt="Temperature">
+                    <span>Temperature (°C)</span>
+                </div>
+                <div class="legend-item">
+                    <span class="rain-text">💧</span>
+                    <span>Rainfall (mm)</span>
+                </div>
+                <div class="legend-item">
+                    <img src="../table-graph/images/icecream.svg" class="icon" alt="Ice cream">
+                    <span>Ice Cream Sales</span>
+                </div>
+                <div class="legend-item">
+                    <span style="background: linear-gradient(135deg, #ffa38b, #ff5c39); padding: 5px 10px; border-radius: 5px; color: white; font-weight: bold;">Highlighted</span>
+                    <span>Missing Ice Cream Data</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

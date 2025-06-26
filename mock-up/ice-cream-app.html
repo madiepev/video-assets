@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ice Cream Shop</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 1rem;
+      background: #fefefe;
+      max-width: 400px;
+      margin: auto;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .flavor-card {
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 12px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .flavor-icon {
+      width: 60px;
+      height: 60px;
+      flex-shrink: 0;
+    }
+
+    .flavor-content {
+      flex: 1;
+    }
+
+    .flavor-name {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .buy-button {
+      background: #ff69b4;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .buy-button:hover {
+      background: #ff1493;
+    }
+  </style>
+</head>
+<body>
+  <h1>🍦 Ice Cream Shop</h1>
+
+  <div class="flavor-card">
+    <svg class="flavor-icon" viewBox="0 0 100 100">
+      <!-- Vanilla Ice Cream Cone -->
+      <path d="M35 60 L50 90 L65 60 Z" fill="#DEB887" stroke="#CD853F" stroke-width="2"/>
+      <circle cx="50" cy="55" r="12" fill="#FFF8DC"/>
+      <circle cx="50" cy="42" r="11" fill="#FFF8DC"/>
+      <circle cx="50" cy="30" r="10" fill="#FFF8DC"/>
+    </svg>
+    <div class="flavor-content">
+      <div class="flavor-name">Vanilla</div>
+      <button class="buy-button">Buy</button>
+    </div>
+  </div>
+
+  <div class="flavor-card">
+    <svg class="flavor-icon" viewBox="0 0 100 100">
+      <!-- Chocolate Ice Cream Cone -->
+      <path d="M35 60 L50 90 L65 60 Z" fill="#DEB887" stroke="#CD853F" stroke-width="2"/>
+      <circle cx="50" cy="55" r="12" fill="#8B4513"/>
+      <circle cx="50" cy="42" r="11" fill="#A0522D"/>
+      <circle cx="50" cy="30" r="10" fill="#CD853F"/>
+    </svg>
+    <div class="flavor-content">
+      <div class="flavor-name">Chocolate</div>
+      <button class="buy-button">Buy</button>
+    </div>
+  </div>
+
+  <div class="flavor-card">
+    <svg class="flavor-icon" viewBox="0 0 100 100">
+      <!-- Strawberry Ice Cream Cone -->
+      <path d="M35 60 L50 90 L65 60 Z" fill="#DEB887" stroke="#CD853F" stroke-width="2"/>
+      <circle cx="50" cy="55" r="12" fill="#FFB6C1"/>
+      <circle cx="50" cy="42" r="11" fill="#FF69B4"/>
+      <circle cx="50" cy="30" r="10" fill="#FF1493"/>
+      <!-- Strawberry seeds -->
+      <circle cx="48" cy="28" r="1" fill="#228B22"/>
+      <circle cx="52" cy="32" r="1" fill="#228B22"/>
+      <circle cx="46" cy="45" r="1" fill="#228B22"/>
+      <circle cx="54" cy="48" r="1" fill="#228B22"/>
+    </svg>
+    <div class="flavor-content">
+      <div class="flavor-name">Strawberry</div>
+      <button class="buy-button">Buy</button>
+    </div>
+  </div>
+
+</body>
+</html>

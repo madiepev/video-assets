@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Temperature vs Ice Cream - Combined View (No Borders)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: #ffffff;
+      font-family: 'Patrick Hand', cursive;
+      padding: 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      gap: 3rem;
+    }
+
+    .container {
+      display: flex;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .table-container {
+      border-radius: 8px;
+      padding: 1rem;
+      max-width: 300px;
+      background-color: #ffffff;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 1.2rem;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 0.5rem;
+      border-bottom: 1px solid #ddd;
+      border-right: 1px solid #ddd;
+      position: relative;
+      overflow: hidden;
+    }
+
+    td {
+      color: transparent;
+      background: linear-gradient(90deg, #000 0%, #000 100%) no-repeat;
+      background-size: 0% 100%;
+      background-clip: text;
+      -webkit-background-clip: text;
+      animation: writeText 0.8s ease-in-out forwards;
+    }
+
+    tbody tr:nth-child(1) td { animation-delay: 2.2s; }
+    tbody tr:nth-child(2) td { animation-delay: 3.0s; }
+    tbody tr:nth-child(3) td { animation-delay: 3.8s; }
+    tbody tr:nth-child(4) td { animation-delay: 4.6s; }
+    tbody tr:nth-child(5) td { animation-delay: 5.4s; }
+    tbody tr:nth-child(6) td { animation-delay: 6.2s; }
+    tbody tr:nth-child(7) td { animation-delay: 7.0s; }
+
+    @keyframes writeText {
+      0% {
+        background-size: 0% 100%;
+        color: transparent;
+      }
+      1% {
+        color: #000;
+      }
+      100% {
+        background-size: 100% 100%;
+        color: #000;
+      }
+    }
+
+    th:last-child, td:last-child {
+      border-right: none;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    th img {
+      width: 30px;
+      height: 30px;
+      vertical-align: middle;
+      filter: invert(0%) sepia(100%) saturate(0%) hue-rotate(0deg) brightness(0%) contrast(100%);
+    }
+
+    tr {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.6s ease forwards;
+    }
+
+    thead tr {
+      opacity: 1;
+      transform: translateY(0);
+      animation: none;
+    }
+
+    tbody tr:nth-child(1) { animation-delay: 2.0s; }
+    tbody tr:nth-child(2) { animation-delay: 2.8s; }
+    tbody tr:nth-child(3) { animation-delay: 3.6s; }
+    tbody tr:nth-child(4) { animation-delay: 4.4s; }
+    tbody tr:nth-child(5) { animation-delay: 5.2s; }
+    tbody tr:nth-child(6) { animation-delay: 6.0s; }
+    tbody tr:nth-child(7) { animation-delay: 6.8s; }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .graph-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    svg {
+      width: 500px;
+      height: 400px;
+      background-color: #ffffff;
+      border-radius: 8px;
+    }
+
+    .dot {
+      fill: purple;
+      stroke: #333;
+      stroke-width: 1;
+      r: 0;
+      animation: pop 0.4s ease-out forwards;
+    }
+
+    @keyframes pop {
+      from {
+        r: 0;
+        opacity: 0;
+      }
+      to {
+        r: 6;
+        opacity: 1;
+      }
+    }
+
+    text {
+      font-size: 24px;
+      fill: black;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <!-- Table Section -->
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th><img src="images/temperature.svg" alt="Temperature" /></th>
+          <th><img src="images/icecream.svg" alt="Ice Cream" /></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>21°C</td><td>93</td></tr>
+        <tr><td>17°C</td><td>87</td></tr>
+        <tr><td>11°C</td><td>56</td></tr>
+        <tr><td>26°C</td><td>102</td></tr>
+        <tr><td>22°C</td><td>103</td></tr>
+        <tr><td>19°C</td><td>101</td></tr>
+        <tr><td>31°C</td><td>127</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Graph Section -->
+  <div class="graph-container">
+    <svg viewBox="0 0 500 400">
+      <!-- Axes -->
+      <line x1="80" y1="300" x2="420" y2="300" stroke="black" stroke-width="3"/>
+      <line x1="100" y1="320" x2="100" y2="60" stroke="black" stroke-width="3"/>
+
+      <!-- Labels -->
+      <text x="65" y="70">y</text>
+      <text x="410" y="325">x</text>
+
+      <!-- Dots (temperature vs ice cream sold) -->
+      <circle class="dot" cx="200" cy="180" style="animation-delay: 2.0s" />  <!-- 21°C, 93 -->
+      <circle class="dot" cx="170" cy="190" style="animation-delay: 2.8s" />  <!-- 17°C, 87 -->
+      <circle class="dot" cx="130" cy="240" style="animation-delay: 3.6s" />  <!-- 11°C, 56 -->
+      <circle class="dot" cx="230" cy="170" style="animation-delay: 4.4s" />  <!-- 26°C, 102 -->
+      <circle class="dot" cx="210" cy="165" style="animation-delay: 5.2s" />  <!-- 22°C, 103 -->
+      <circle class="dot" cx="185" cy="175" style="animation-delay: 6.0s" />  <!-- 19°C, 101 -->
+      <circle class="dot" cx="280" cy="140" style="animation-delay: 6.8s" />  <!-- 31°C, 127 -->
+    </svg>
+  </div>
+</div>
+
+</body>
+</html>

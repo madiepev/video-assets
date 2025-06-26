@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.2" />
+  <title>Ice Cream Sales Predictor</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #f1f1f1;
+      margin: 0;
+      padding: 2rem;
+      max-width: 700px;
+      margin: auto;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 2.5rem;
+      font-size: 2rem;
+    }
+
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    label {
+      font-size: 1.1rem;
+      font-weight: bold;
+    }
+
+    input[type="number"] {
+      font-size: 1.2rem;
+      padding: 0.7rem;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      width: 100%;
+    }
+
+    button {
+      background: #4CAF50;
+      color: white;
+      padding: 0.9rem;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #45a049;
+    }
+
+    .result {
+      font-size: 1.4rem;
+      text-align: center;
+      margin-top: 1rem;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🍦 Ice Cream Sales Predictor</h1>
+
+  <div class="card">
+    <div>
+      <label for="temp">Enter Temperature (°C):</label>
+      <input type="number" id="temp" placeholder="e.g., 27" />
+    </div>
+
+    <button onclick="predictSales()">Predict Sales</button>
+
+    <div class="result" id="output"></div>
+  </div>
+
+  <script>
+    function predictSales() {
+      const temp = parseFloat(document.getElementById('temp').value);
+      if (isNaN(temp)) {
+        document.getElementById('output').textContent = "Please enter a valid temperature.";
+        return;
+      }
+
+      const sales = Math.round(3 * temp + 30); // Simple regression: Y = 3X + 30
+      document.getElementById('output').textContent =
+        `📈 Estimated Sales: ${sales} ice creams`;
+    }
+  </script>
+
+</body>
+</html>

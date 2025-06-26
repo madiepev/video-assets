@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Temperature vs Ice Cream Sales - WWL Data Visualization</title>
+  <style>
+    body {
+      background: #e8e6df;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      gap: 2rem;
+      margin: 0;
+      color: #091f2c;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .header h1 {
+      font-size: 2rem;
+      font-weight: 600;
+      color: #091f2c;
+      margin: 0 0 0.5rem 0;
+      opacity: 0;
+      animation: fadeIn 0.8s ease forwards;
+    }
+
+    .header p {
+      font-size: 1.1rem;
+      color: #091f2c;
+      opacity: 0.8;
+      margin: 0;
+      opacity: 0;
+      animation: fadeIn 0.8s ease 0.2s forwards;
+    }
+
+    .container {
+      display: flex;
+      gap: 3rem;
+      align-items: flex-start;
+      max-width: 1200px;
+      width: 100%;
+    }
+
+    .table-container {
+      background-color: #f4f3f5;
+      border-radius: 12px;
+      padding: 2rem;
+      flex: 1;
+      max-width: 400px;
+      box-shadow: 0 4px 16px rgba(9, 31, 44, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      opacity: 0;
+      animation: fadeInUp 0.8s ease 0.4s forwards;
+      min-height: 500px;
+      height: 500px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .table-container:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(9, 31, 44, 0.15);
+    }
+
+    .table-header {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #091f2c;
+      margin-bottom: 1.5rem;
+      text-align: center;
+      border-bottom: 2px solid #0078d4;
+      padding-bottom: 0.5rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 1.1rem;
+      background-color: transparent;
+    }
+
+    th, td {
+      text-align: center;
+      padding: 1rem 0.5rem;
+      border-bottom: 1px solid rgba(9, 31, 44, 0.1);
+      color: #091f2c;
+    }
+
+    th {
+      background-color: #0078d4;
+      color: white;
+      font-weight: 600;
+      font-size: 1rem;
+      border-bottom: none;
+    }
+
+    th:first-child {
+      border-top-left-radius: 8px;
+    }
+
+    th:last-child {
+      border-top-right-radius: 8px;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    tbody tr:nth-child(odd) {
+      background-color: rgba(141, 200, 232, 0.1);
+    }
+
+    tbody tr:hover {
+      background-color: rgba(255, 92, 57, 0.1);
+      transition: background-color 0.3s ease;
+    }
+
+    th img {
+      width: 32px;
+      height: 32px;
+      vertical-align: middle;
+      filter: brightness(0) invert(1);
+    }
+
+    tr {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.6s ease forwards;
+    }
+
+    thead tr {
+      opacity: 1;
+      transform: translateY(0);
+      animation: none;
+    }
+
+    tbody tr:nth-child(1) { animation-delay: 2.0s; }
+    tbody tr:nth-child(2) { animation-delay: 2.8s; }
+    tbody tr:nth-child(3) { animation-delay: 3.6s; }
+    tbody tr:nth-child(4) { animation-delay: 4.4s; }
+    tbody tr:nth-child(5) { animation-delay: 5.2s; }
+    tbody tr:nth-child(6) { animation-delay: 6.0s; }
+    tbody tr:nth-child(7) { animation-delay: 6.8s; }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .graph-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: stretch;
+      background-color: #f4f3f5;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 4px 16px rgba(9, 31, 44, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      opacity: 0;
+      animation: fadeInUp 0.8s ease 0.6s forwards;
+      min-height: 500px;
+      height: 500px;
+    }
+
+    .graph-container:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(9, 31, 44, 0.15);
+    }
+
+    .graph-header {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #091f2c;
+      margin-bottom: 1.5rem;
+      text-align: center;
+      border-bottom: 2px solid #ff5c39;
+      padding-bottom: 0.5rem;
+      width: 100%;
+    }
+
+    svg {
+      width: 100%;
+      max-width: 100%;
+      height: 100%;
+      max-height: 600px;
+      background-color: transparent;
+      border-radius: 8px;
+      flex: 1;
+    }
+
+    .dot {
+      stroke: none;
+      stroke-width: 0;
+      r: 0;
+      fill: #702573;
+      animation: pop 0.4s ease-out forwards;
+      transition: all 0.3s ease;
+    }
+
+    .dot:hover {
+      r: 8;
+      stroke: none;
+    }
+
+    @keyframes pop {
+      from {
+        r: 0;
+        opacity: 0;
+      }
+      to {
+        r: 6;
+        opacity: 1;
+      }
+    }
+
+    .axis-line {
+      stroke: #091f2c;
+      stroke-width: 2;
+    }
+
+    .axis-label {
+      font-size: 24px;
+      fill: #091f2c;
+      font-weight: 600;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .axis-title {
+      font-size: 14px;
+      fill: #091f2c;
+      font-weight: 500;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+        gap: 2rem;
+      }
+      
+      .table-container,
+      .graph-container {
+        max-width: 100%;
+        width: 100%;
+      }
+      
+      body {
+        padding: 1rem;
+      }
+      
+      .header h1 {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <!-- Table Section -->
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th><img src="images/temperature.svg" alt="Temperature" /></th>
+          <th><img src="images/icecream.svg" alt="Ice Cream" /></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>21°C</td><td>93 units</td></tr>
+        <tr><td>17°C</td><td>87 units</td></tr>
+        <tr><td>11°C</td><td>56 units</td></tr>
+        <tr><td>26°C</td><td>102 units</td></tr>
+        <tr><td>22°C</td><td>103 units</td></tr>
+        <tr><td>19°C</td><td>101 units</td></tr>
+        <tr><td>31°C</td><td>127 units</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Graph Section -->
+  <div class="graph-container">
+    <svg viewBox="0 0 600 500">
+      <!-- Axes -->
+      <line class="axis-line" x1="80" y1="400" x2="520" y2="400"/>
+      <line class="axis-line" x1="100" y1="420" x2="100" y2="80"/>
+
+      <!-- Axis Labels -->
+      <text class="axis-label" x="510" y="420" text-anchor="middle">x</text>
+      <text class="axis-label" x="85" y="90" text-anchor="middle">y</text>
+
+      <!-- Data Points with improved positioning and colors -->
+      <circle class="dot" cx="250" cy="240" style="animation-delay: 2.0s" />  <!-- 21°C, 93 -->
+      <circle class="dot" cx="210" cy="250" style="animation-delay: 2.8s" />  <!-- 17°C, 87 -->
+      <circle class="dot" cx="160" cy="320" style="animation-delay: 3.6s" />  <!-- 11°C, 56 -->
+      <circle class="dot" cx="290" cy="225" style="animation-delay: 4.4s" />  <!-- 26°C, 102 -->
+      <circle class="dot" cx="270" cy="220" style="animation-delay: 5.2s" />  <!-- 22°C, 103 -->
+      <circle class="dot" cx="235" cy="235" style="animation-delay: 6.0s" />  <!-- 19°C, 101 -->
+      <circle class="dot" cx="370" cy="185" style="animation-delay: 6.8s" />  <!-- 31°C, 127 -->
+    </svg>
+  </div>
+</div>
+
+</body>
+</html>

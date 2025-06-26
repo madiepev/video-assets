@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -19,19 +18,39 @@
       box-sizing: border-box;
     }
 
+    .main-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+      width: 100%;
+      max-width: 900px;
+    }
+
+    .title {
+      color: #091f2c;
+      font-size: 2.5rem;
+      font-weight: 700;
+      text-align: center;
+      margin: 0;
+      letter-spacing: 1px;
+      text-shadow: 0 2px 4px rgba(9, 31, 44, 0.1);
+    }
+
     .container {
       background-color: #f4f3f5; /* Content Background: Off white */
       border-radius: 12px; /* Consistent rounded corners */
       box-shadow: 0 4px 16px rgba(9, 31, 44, 0.1); /* Professional shadow */
-      padding: 48px 64px;
+      padding: 40px 48px;
       display: flex;
       align-items: center;
-      gap: 64px;
+      justify-content: center;
+      gap: 80px;
       transition: all 0.3s ease; /* Smooth transitions */
       animation: fadeInUp 0.6s ease-out;
       position: relative;
-      max-width: 800px;
       width: 100%;
+      min-height: 280px;
     }
 
     .icon-block {
@@ -40,10 +59,12 @@
       align-items: center;
       gap: 16px;
       text-align: center;
-      padding: 24px 32px;
+      padding: 20px;
       border-radius: 8px;
       transition: all 0.3s ease;
       position: relative;
+      min-width: 200px;
+      flex-shrink: 0;
     }
 
     .icon-block:hover {
@@ -89,6 +110,7 @@
       color: #091f2c; /* Blueblack text */
       margin-top: 8px;
       letter-spacing: 0.5px;
+      white-space: nowrap; /* Prevent text wrapping */
     }
 
     .icon-subtitle {
@@ -96,6 +118,7 @@
       font-weight: 400;
       color: rgba(9, 31, 44, 0.7);
       margin-top: 4px;
+      white-space: nowrap; /* Prevent text wrapping */
     }
 
     .arrow {
@@ -105,6 +128,7 @@
       font-weight: 700;
       text-shadow: 0 2px 4px rgba(9, 31, 44, 0.2);
       letter-spacing: 2px;
+      flex-shrink: 0;
     }
 
     .arrow:hover {
@@ -127,19 +151,48 @@
 
     /* Responsive design */
     @media (max-width: 768px) {
+      .title {
+        font-size: 2rem;
+      }
+      
       .container {
         flex-direction: column;
         gap: 32px;
         padding: 32px 24px;
+        min-height: auto;
+      }
+      
+      .icon-block {
+        min-width: auto;
+        width: 100%;
       }
       
       .arrow {
         transform: rotate(90deg);
-        font-size: 2.5rem;
+        font-size: 3rem;
       }
       
       .arrow:hover {
-        transform: rotate(90deg) translateX(8px) scale(1.1);
+        transform: rotate(90deg) translateX(8px) scale(1.15);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .title {
+        font-size: 1.5rem;
+      }
+      
+      .container {
+        gap: 24px;
+        padding: 24px 16px;
+      }
+      
+      .icon-label {
+        font-size: 1.1rem;
+      }
+      
+      .icon-subtitle {
+        font-size: 0.8rem;
       }
     }
 
@@ -164,21 +217,24 @@
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="icon-block">
-      <div class="icon-container">
-        <img src="images/temperature.svg" alt="Temperature Icon" />
+  <div class="main-wrapper">
+    <h1 class="title">Temperature → Ice Cream Sales</h1>
+    <div class="container">
+      <div class="icon-block">
+        <div class="icon-container">
+          <img src="images/temperature.svg" alt="Temperature Icon" />
+        </div>
+        <div class="icon-label">Temperature</div>
+        <div class="icon-subtitle">Environmental Data</div>
       </div>
-      <div class="icon-label">Temperature</div>
-      <div class="icon-subtitle">Environmental Data</div>
-    </div>
-    <div class="arrow">→</div>
-    <div class="icon-block">
-      <div class="icon-container">
-        <img src="images/icecream.svg" alt="Ice Cream Icon" />
+      <div class="arrow">→</div>
+      <div class="icon-block">
+        <div class="icon-container">
+          <img src="images/icecream.svg" alt="Ice Cream Icon" />
+        </div>
+        <div class="icon-label">Ice Cream Sales</div>
+        <div class="icon-subtitle">Business Outcome</div>
       </div>
-      <div class="icon-label">Ice Cream Sales</div>
-      <div class="icon-subtitle">Business Outcome</div>
     </div>
   </div>
 </body>

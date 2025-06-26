@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Animated Table - Teacher Style</title>
+  <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: #fefbf6;
+      font-family: 'Patrick Hand', cursive;
+      padding: 2rem;
+      display: flex;
+      justify-content: center;
+    }
+
+    .table-container {
+      border: 3px solid #000;
+      border-radius: 8px;
+      padding: 1rem;
+      max-width: 300px;
+      background-color: #fffdf7;
+      box-shadow: 4px 4px 0 #ccc;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 1.2rem;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 0.5rem;
+      border-bottom: 2px solid #000;
+    }
+
+    tr {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.6s ease forwards;
+    }
+
+    tr:nth-child(1) { animation-delay: 0.5s; }
+    tr:nth-child(2) { animation-delay: 1s; }
+    tr:nth-child(3) { animation-delay: 1.5s; }
+    tr:nth-child(4) { animation-delay: 2s; }
+    tr:nth-child(5) { animation-delay: 2.5s; }
+    tr:nth-child(6) { animation-delay: 3s; }
+    tr:nth-child(7) { animation-delay: 3.5s; }
+    tr:nth-child(8) { animation-delay: 4s; }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .highlight {
+      position: relative;
+    }
+
+    .highlight::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 4px;
+      width: 100%;
+      height: 6px;
+      background: #fcd34d;
+      z-index: -1;
+      transform: scaleX(0);
+      transform-origin: left;
+      animation: underline 0.5s ease forwards;
+      animation-delay: 0.8s;
+    }
+
+    @keyframes underline {
+      to {
+        transform: scaleX(1);
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="table-container">
+  <table>
+    <thead>
+      <tr>
+        <th>🌡️ Temp</th>
+        <th>🍦 Sold</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>21°C</td><td class="highlight">93</td></tr>
+      <tr><td>17°C</td><td>87</td></tr>
+      <tr><td>11°C</td><td>56</td></tr>
+      <tr><td>26°C</td><td>102</td></tr>
+      <tr><td>22°C</td><td>103</td></tr>
+      <tr><td>19°C</td><td>101</td></tr>
+      <tr><td>31°C</td><td>127</td></tr>
+    </tbody>
+  </table>
+</div>
+
+</body>
+</html>

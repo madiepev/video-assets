@@ -33,6 +33,18 @@
       text-align: left;
       padding: 0.5rem;
       border-bottom: 2px solid #000;
+      border-right: 2px solid #000;
+    }
+
+    th:last-child, td:last-child {
+      border-right: none;
+    }
+
+    th img {
+      width: 30px;
+      height: 30px;
+      vertical-align: middle;
+      filter: invert(0%) sepia(100%) saturate(0%) hue-rotate(0deg) brightness(0%) contrast(100%);
     }
 
     tr {
@@ -41,44 +53,24 @@
       animation: fadeInUp 0.6s ease forwards;
     }
 
-    tr:nth-child(1) { animation-delay: 0.5s; }
-    tr:nth-child(2) { animation-delay: 1s; }
-    tr:nth-child(3) { animation-delay: 1.5s; }
-    tr:nth-child(4) { animation-delay: 2s; }
-    tr:nth-child(5) { animation-delay: 2.5s; }
-    tr:nth-child(6) { animation-delay: 3s; }
-    tr:nth-child(7) { animation-delay: 3.5s; }
-    tr:nth-child(8) { animation-delay: 4s; }
+    thead tr {
+      opacity: 1;
+      transform: translateY(0);
+      animation: none;
+    }
+
+    tbody tr:nth-child(1) { animation-delay: 0.5s; }
+    tbody tr:nth-child(2) { animation-delay: 1s; }
+    tbody tr:nth-child(3) { animation-delay: 1.5s; }
+    tbody tr:nth-child(4) { animation-delay: 2s; }
+    tbody tr:nth-child(5) { animation-delay: 2.5s; }
+    tbody tr:nth-child(6) { animation-delay: 3s; }
+    tbody tr:nth-child(7) { animation-delay: 4s; }
 
     @keyframes fadeInUp {
       to {
         opacity: 1;
         transform: translateY(0);
-      }
-    }
-
-    .highlight {
-      position: relative;
-    }
-
-    .highlight::after {
-      content: '';
-      position: absolute;
-      left: 0;
-      bottom: 4px;
-      width: 100%;
-      height: 6px;
-      background: #fcd34d;
-      z-index: -1;
-      transform: scaleX(0);
-      transform-origin: left;
-      animation: underline 0.5s ease forwards;
-      animation-delay: 0.8s;
-    }
-
-    @keyframes underline {
-      to {
-        transform: scaleX(1);
       }
     }
   </style>
@@ -89,12 +81,12 @@
   <table>
     <thead>
       <tr>
-        <th>🌡️ Temp</th>
-        <th>🍦 Sold</th>
+        <th><img src="images/temperature.svg" alt="Temperature" /></th>
+        <th><img src="images/icecream.svg" alt="Ice Cream" /></th>
       </tr>
     </thead>
     <tbody>
-      <tr><td>21°C</td><td class="highlight">93</td></tr>
+      <tr><td>21°C</td><td>93</td></tr>
       <tr><td>17°C</td><td>87</td></tr>
       <tr><td>11°C</td><td>56</td></tr>
       <tr><td>26°C</td><td>102</td></tr>

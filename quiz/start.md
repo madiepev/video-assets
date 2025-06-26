@@ -218,7 +218,6 @@
 </head>
 <body>
   <div class="main-wrapper">
-    <h1 class="title">Temperature → Ice Cream Sales</h1>
     <div class="container">
       <div class="icon-block">
         <div class="icon-container">

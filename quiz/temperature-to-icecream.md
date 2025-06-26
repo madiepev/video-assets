@@ -1,3 +1,7 @@
+# Temperature to Ice Cream Sales - Whiteboard Visualization
+
+This visualization demonstrates the positive correlation between temperature increases and ice cream sales using an interactive whiteboard-style interface.
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -365,3 +369,32 @@
     </script>
 </body>
 </html>
+
+## About This Visualization
+
+This interactive whiteboard visualization demonstrates the strong positive correlation between temperature and ice cream sales. The design features:
+
+- **Interactive Elements**: Hover and click effects on the icons
+- **Animated Arrows**: Shows the flow from cause to effect
+- **Handwritten Notes**: Simulate a real whiteboarding session
+- **Responsive Design**: Works on both desktop and mobile devices
+- **Educational Insights**: Key takeaways about the business relationship
+
+### Technical Features
+
+- Pure HTML, CSS, and JavaScript (no external dependencies)
+- CSS Grid and Flexbox for responsive layout
+- CSS animations and transitions for engaging interactions
+- Fallback image loading for SVG/PNG compatibility
+- Mobile-first responsive design
+
+### Usage
+
+This visualization can be used for:
+
+- Business presentations about data correlation
+- Educational content about cause-and-effect relationships
+- Marketing materials for ice cream businesses
+- Data science examples of positive correlation
+
+The visualization uses your existing image assets in the `quiz/images/` folder and will automatically fall back from SVG to PNG if needed.

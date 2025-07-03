@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature & Ice Cream Transition</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', 'Marker Felt', 'Chalkduster', cursive;
+            background: #fefefe;
+            color: #2c2c2c;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 1px 1px, rgba(0,0,0,.1) 1px, transparent 0);
+            background-size: 20px 20px;
+        }
+
+        .container {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+        }
+
+        /* Whiteboard Overview Section */
+        .whiteboard-section {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: #fefefe;
+            transition: all 1.5s ease-in-out;
+            z-index: 2;
+            /* Add subtle paper texture */
+            background-image: 
+                radial-gradient(circle at 1px 1px, rgba(0,0,0,.05) 1px, transparent 0),
+                linear-gradient(0deg, transparent 24%, rgba(255,255,255,0.05) 25%, rgba(255,255,255,0.05) 26%, transparent 27%, transparent 74%, rgba(255,255,255,0.05) 75%, rgba(255,255,255,0.05) 76%, transparent 77%, transparent);
+            background-size: 20px 20px, 50px 50px;
+        }
+
+        .whiteboard-section.hidden {
+            opacity: 0;
+            transform: translateY(-100%);
+        }
+
+        .concept-flow {
+            display: flex;
+            align-items: center;
+            gap: 80px;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .concept-flow::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            right: -20px;
+            bottom: -20px;
+            border: 3px dashed rgba(44,44,44,0.3);
+            border-radius: 40px;
+            transform: rotate(-1deg);
+            z-index: -1;
+        }
+
+        .concept-item {
+            text-align: center;
+            animation: fadeInUp 1s ease-out;
+            position: relative;
+        }
+
+        .concept-item::after {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border: 2px dotted rgba(44,44,44,0.2);
+            border-radius: 20px;
+            transform: rotate(1deg);
+            z-index: -1;
+        }
+
+        .concept-item:nth-child(3)::after {
+            transform: rotate(-1deg);
+        }
+
+        .concept-item h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .icon-container {
+            width: 180px;
+            height: 180px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #fefefe;
+            border: 4px solid #2c2c2c;
+            border-radius: 25px;
+            margin: 0 auto 20px;
+            box-shadow: 
+                3px 3px 0px #2c2c2c,
+                6px 6px 0px rgba(44,44,44,0.3);
+            transform: rotate(-1deg);
+            position: relative;
+            /* Hand-drawn border effect */
+            border-style: solid;
+            border-image: url("data:image/svg+xml,%3csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='m2,2 l96,0 l0,96 l-96,0 z' fill='none' stroke='%23262626' stroke-width='4' stroke-dasharray='1,1'/%3e%3c/svg%3e") 4;
+        }
+
+        .icon-container:nth-child(2) {
+            transform: rotate(1.5deg);
+        }
+
+        .icon-container svg {
+            width: 100px;
+            height: 100px;
+            filter: drop-shadow(2px 2px 0px rgba(44,44,44,0.4));
+        }
+
+        .arrow {
+            font-size: 5rem;
+            color: #2c2c2c;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+            transform: rotate(-3deg);
+            text-shadow: 3px 3px 0px rgba(44,44,44,0.3);
+            font-family: 'Comic Sans MS', cursive;
+        }
+
+        .subtitle {
+            font-size: 1.8rem;
+            margin-top: 40px;
+            color: #555;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        /* Table Section */
+        .table-section {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: white;
+            opacity: 0;
+            transform: translateY(100%);
+            transition: all 1.5s ease-in-out;
+            z-index: 1;
+        }
+
+        .table-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+            z-index: 3;
+        }
+
+        .data-table {
+            background: #fefefe;
+            border-radius: 30px;
+            box-shadow: 
+                5px 5px 0px #2c2c2c,
+                10px 10px 0px rgba(44,44,44,0.3);
+            overflow: hidden;
+            border: 5px solid #2c2c2c;
+            transform: rotate(-0.5deg);
+            position: relative;
+        }
+
+        .data-table::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 2px,
+                rgba(44,44,44,0.1) 2px,
+                rgba(44,44,44,0.1) 4px
+            );
+            z-index: -1;
+            border-radius: 35px;
+        }
+
+        .table-header {
+            display: flex;
+            background: #f8f9fa;
+            border-bottom: 4px solid #2c2c2c;
+            position: relative;
+        }
+
+        .table-header::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: repeating-linear-gradient(
+                90deg,
+                #2c2c2c 0px,
+                #2c2c2c 10px,
+                transparent 10px,
+                transparent 15px
+            );
+        }
+
+        .header-cell {
+            padding: 35px;
+            text-align: center;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            min-width: 220px;
+            border-right: 3px solid #2c2c2c;
+            position: relative;
+        }
+
+        .header-cell::after {
+            content: '';
+            position: absolute;
+            right: -1px;
+            top: 10px;
+            bottom: 10px;
+            width: 1px;
+            background: repeating-linear-gradient(
+                180deg,
+                #2c2c2c 0px,
+                #2c2c2c 8px,
+                transparent 8px,
+                transparent 12px
+            );
+        }
+
+        .header-cell:last-child {
+            border-right: none;
+        }
+
+        .header-cell h3 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .header-icon {
+            width: 130px;
+            height: 130px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #fefefe;
+            border: 4px solid #2c2c2c;
+            border-radius: 20px;
+            box-shadow: 
+                4px 4px 0px #2c2c2c,
+                8px 8px 0px rgba(44,44,44,0.3);
+            transform: rotate(1deg);
+            position: relative;
+            overflow: visible;
+        }
+
+        .header-icon:nth-child(1) {
+            transform: rotate(-1.5deg);
+        }
+
+        .header-icon svg {
+            width: 90px;
+            height: 90px;
+            filter: drop-shadow(2px 2px 0px rgba(44,44,44,0.4));
+            transform: scale(1.1);
+        }
+
+        .table-row {
+            display: flex;
+            border-bottom: 2px solid #ddd;
+            position: relative;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                rgba(44,44,44,0.02) 50%, 
+                transparent 100%);
+        }
+
+        .table-row::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 20px;
+            right: 20px;
+            height: 1px;
+            background: repeating-linear-gradient(
+                90deg,
+                #ddd 0px,
+                #ddd 8px,
+                transparent 8px,
+                transparent 12px
+            );
+        }
+
+        .table-row:last-child {
+            border-bottom: none;
+        }
+
+        .table-cell {
+            padding: 30px 35px;
+            flex: 1;
+            text-align: center;
+            font-size: 1.3rem;
+            color: #2c2c2c;
+            border-right: 2px solid #ddd;
+            position: relative;
+            min-height: 60px;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 40px,
+                rgba(44,44,44,0.02) 40px,
+                rgba(44,44,44,0.02) 41px
+            );
+        }
+
+        .table-cell::after {
+            content: '';
+            position: absolute;
+            right: -1px;
+            top: 15px;
+            bottom: 15px;
+            width: 1px;
+            background: repeating-linear-gradient(
+                180deg,
+                #ddd 0px,
+                #ddd 6px,
+                transparent 6px,
+                transparent 10px
+            );
+        }
+
+        .table-cell:last-child {
+            border-right: none;
+        }
+
+        .table-cell.highlight {
+            background: #fffacd;
+            font-weight: 600;
+            color: #8b4513;
+            position: relative;
+            border: 2px dashed #daa520;
+            border-radius: 8px;
+            margin: 2px;
+        }
+
+        .table-cell.highlight::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 3px,
+                rgba(218,165,32,0.3) 3px,
+                rgba(218,165,32,0.3) 6px
+            );
+            border-radius: 10px;
+            z-index: -1;
+        }
+
+        /* Transition Button */
+        .transition-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #2c2c2c;
+            color: #fefefe;
+            border: 4px solid #2c2c2c;
+            padding: 20px 35px;
+            border-radius: 35px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+            box-shadow: 
+                4px 4px 0px #2c2c2c,
+                8px 8px 0px rgba(44,44,44,0.3);
+            transform: rotate(-2deg);
+            font-family: 'Comic Sans MS', cursive;
+            text-shadow: 1px 1px 0px rgba(0,0,0,0.3);
+        }
+
+        .transition-btn:hover {
+            background: #404040;
+            transform: rotate(-2deg) translateY(-3px);
+            box-shadow: 
+                6px 6px 0px #2c2c2c,
+                12px 12px 0px rgba(44,44,44,0.3);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .concept-flow {
+                flex-direction: column;
+                gap: 30px;
+            }
+
+            .arrow {
+                transform: rotate(90deg);
+                font-size: 3rem;
+            }
+
+            .concept-item h2 {
+                font-size: 2rem;
+            }
+
+            .table-header {
+                flex-direction: column;
+            }
+
+            .header-cell {
+                border-right: none;
+                border-bottom: 2px solid #333;
+            }
+
+            .header-cell:last-child {
+                border-bottom: none;
+            }
+
+            .table-row {
+                flex-direction: column;
+            }
+
+            .table-cell {
+                border-right: none;
+                border-bottom: 1px solid #ddd;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Whiteboard Overview Section -->
+        <div class="whiteboard-section" id="whiteboard">
+            <div class="concept-flow">
+                <div class="concept-item">
+                    <div class="icon-container">
+                        <svg width="100" height="100" viewBox="900 200 150 150" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" overflow="visible">
+                            <g transform="translate(-947 -238)">
+                                <path d="M995 324.3C988.5 324.3 982.8 319.7 981.4 313.4 979.9 307 983.1 300.5 989 297.7L989 253.7C989 250.4 991.7 247.7 995 247.7 998.3 247.7 1001 250.4 1001 253.7L1001 297.7C1006.9 300.5 1010 307 1008.6 313.4 1007.1 319.7 1001.5 324.2 995 324.3L995 324.3ZM1007 294.3 1007 253.7C1007 247.1 1001.6 241.7 995 241.7 988.4 241.7 983 247 983 253.7L983 294.3C976.1 299.5 973.3 308.5 976 316.6 978.7 324.8 986.4 330.3 995 330.3 1003.6 330.3 1011.3 324.8 1014 316.6 1016.7 308.5 1013.9 299.5 1007 294.3Z" fill="#2c2c2c"/>
+                                <path d="M997 300.5 997 276.3 993 276.3 993 300.5C988 301.5 984.5 306.2 985.1 311.3 985.6 316.4 989.9 320.3 995 320.3 1000.1 320.3 1004.4 316.4 1004.9 311.3 1005.5 306.2 1002 301.5 997 300.5Z" fill="#dc143c"/>
+                            </g>
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="arrow">→</div>
+
+                <div class="concept-item">
+                    <div class="icon-container">
+                        <svg width="100" height="100" viewBox="850 30 150 150" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" overflow="visible">
+                            <g transform="translate(-897 -64)">
+                                <path d="M962.6 97.2C963.5 95 964 92.6 964 90 964 79.5 955.5 71 945 71 934.5 71 926 79.5 926 90 926 92.5 926.5 94.9 927.4 97.2 923.7 97.9 921 101.2 921 105 921 109.4 924.6 113 929 113 932.7 113 935.8 110.4 936.7 107L937.2 107C938.1 110.4 941.2 113 944.9 113 948.6 113 951.7 110.4 952.6 107L953.1 107C954 110.4 957.1 113 960.8 113 965.2 113 968.8 109.4 968.8 105 969 101.1 966.2 97.9 962.6 97.2Z" fill="#ff69b4"/>
+                                <path d="M945 117C941.9 117 939.1 115.8 937 113.9 935.1 115.6 932.7 116.7 930.1 116.9L937.2 134.2 937.9 135.8 945 153 958.9 119.3 959.9 116.9C957.3 116.7 954.9 115.5 953 113.9 950.9 115.8 948.1 117 945 117ZM946.5 139C945.6 139.1 944.7 139.3 943.7 139.4L942.1 135.5C944.4 135.3 946.4 134.9 948.3 134.6L946.5 139ZM951.9 125.9C948.5 126.7 944.2 127.5 939 127.8L937.4 123.9C944.7 123.5 950.3 122.3 953.9 121.3L951.9 125.9Z" fill="#8b4513"/>
+                            </g>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Table Section -->
+        <div class="table-section" id="tableSection">
+            <div class="data-table">
+                <div class="table-header">
+                    <div class="header-cell">
+                        <div class="header-icon">
+                            <svg width="96" height="96" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" overflow="hidden">
+                                <g transform="translate(-947 -238)">
+                                    <path d="M995 324.3C988.5 324.3 982.8 319.7 981.4 313.4 979.9 307 983.1 300.5 989 297.7L989 253.7C989 250.4 991.7 247.7 995 247.7 998.3 247.7 1001 250.4 1001 253.7L1001 297.7C1006.9 300.5 1010 307 1008.6 313.4 1007.1 319.7 1001.5 324.2 995 324.3L995 324.3ZM1007 294.3 1007 253.7C1007 247.1 1001.6 241.7 995 241.7 988.4 241.7 983 247 983 253.7L983 294.3C976.1 299.5 973.3 308.5 976 316.6 978.7 324.8 986.4 330.3 995 330.3 1003.6 330.3 1011.3 324.8 1014 316.6 1016.7 308.5 1013.9 299.5 1007 294.3Z"/>
+                                    <path d="M997 300.5 997 276.3 993 276.3 993 300.5C988 301.5 984.5 306.2 985.1 311.3 985.6 316.4 989.9 320.3 995 320.3 1000.1 320.3 1004.4 316.4 1004.9 311.3 1005.5 306.2 1002 301.5 997 300.5Z"/>
+                                </g>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="header-cell">
+                        <div class="header-icon">
+                            <svg width="96" height="96" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" overflow="hidden">
+                                <g transform="translate(-897 -64)">
+                                    <path d="M962.6 97.2C963.5 95 964 92.6 964 90 964 79.5 955.5 71 945 71 934.5 71 926 79.5 926 90 926 92.5 926.5 94.9 927.4 97.2 923.7 97.9 921 101.2 921 105 921 109.4 924.6 113 929 113 932.7 113 935.8 110.4 936.7 107L937.2 107C938.1 110.4 941.2 113 944.9 113 948.6 113 951.7 110.4 952.6 107L953.1 107C954 110.4 957.1 113 960.8 113 965.2 113 968.8 109.4 968.8 105 969 101.1 966.2 97.9 962.6 97.2Z"/>
+                                    <path d="M945 117C941.9 117 939.1 115.8 937 113.9 935.1 115.6 932.7 116.7 930.1 116.9L937.2 134.2 937.9 135.8 945 153 958.9 119.3 959.9 116.9C957.3 116.7 954.9 115.5 953 113.9 950.9 115.8 948.1 117 945 117ZM946.5 139C945.6 139.1 944.7 139.3 943.7 139.4L942.1 135.5C944.4 135.3 946.4 134.9 948.3 134.6L946.5 139ZM951.9 125.9C948.5 126.7 944.2 127.5 939 127.8L937.4 123.9C944.7 123.5 950.3 122.3 953.9 121.3L951.9 125.9Z"/>
+                                </g>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="table-row">
+                    <div class="table-cell"></div>
+                    <div class="table-cell"></div>
+                </div>
+                <div class="table-row">
+                    <div class="table-cell"></div>
+                    <div class="table-cell"></div>
+                </div>
+                <div class="table-row">
+                    <div class="table-cell"></div>
+                    <div class="table-cell"></div>
+                </div>
+                <div class="table-row">
+                    <div class="table-cell highlight"></div>
+                    <div class="table-cell highlight"></div>
+                </div>
+                <div class="table-row">
+                    <div class="table-cell highlight"></div>
+                    <div class="table-cell highlight"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Transition Button -->
+        <button class="transition-btn" onclick="toggleView()" id="transitionBtn">
+        </button>
+    </div>
+
+    <script>
+        let isTableView = false;
+
+        function toggleView() {
+            const whiteboard = document.getElementById('whiteboard');
+            const tableSection = document.getElementById('tableSection');
+            const btn = document.getElementById('transitionBtn');
+
+            if (!isTableView) {
+                // Transition to table view
+                whiteboard.classList.add('hidden');
+                tableSection.classList.add('visible');
+                isTableView = true;
+            } else {
+                // Transition back to whiteboard view
+                whiteboard.classList.remove('hidden');
+                tableSection.classList.remove('visible');
+                isTableView = false;
+            }
+        }
+
+        // Auto-transition after 4 seconds for demo purposes
+        setTimeout(() => {
+            if (!isTableView) {
+                toggleView();
+            }
+        }, 4000);
+    </script>
+</body>
+</html>

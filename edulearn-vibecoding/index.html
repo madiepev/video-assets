@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wave Interference Simulation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Wave Interference Simulation</h1>
+            <p class="subtitle">Explore how waves combine to create beautiful interference patterns</p>
+        </header>
+
+        <div class="main-content">
+            <div class="simulation-container">
+                <canvas id="waveCanvas" width="800" height="600"></canvas>
+                <div class="wave-sources">
+                    <div class="wave-source" id="source1" style="left: 200px; top: 300px;"></div>
+                    <div class="wave-source" id="source2" style="left: 600px; top: 300px;"></div>
+                </div>
+                <div class="instructions">
+                    <p>💡 Click and drag the wave sources to move them around</p>
+                </div>
+            </div>
+
+            <div class="controls-panel">
+                <h3>Wave Controls</h3>
+                
+                <div class="control-group">
+                    <h4>Wave Source 1 (Red)</h4>
+                    <div class="control-row">
+                        <label for="freq1">Frequency:</label>
+                        <input type="range" id="freq1" min="0.5" max="3" step="0.1" value="1.5">
+                        <span id="freq1-value">1.5 Hz</span>
+                    </div>
+                    <div class="control-row">
+                        <label for="amp1">Amplitude:</label>
+                        <input type="range" id="amp1" min="0.1" max="2" step="0.1" value="1">
+                        <span id="amp1-value">1.0</span>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <h4>Wave Source 2 (Blue)</h4>
+                    <div class="control-row">
+                        <label for="freq2">Frequency:</label>
+                        <input type="range" id="freq2" min="0.5" max="3" step="0.1" value="1.2">
+                        <span id="freq2-value">1.2 Hz</span>
+                    </div>
+                    <div class="control-row">
+                        <label for="amp2">Amplitude:</label>
+                        <input type="range" id="amp2" min="0.1" max="2" step="0.1" value="1">
+                        <span id="amp2-value">1.0</span>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <div class="control-row">
+                        <button id="playPause" class="btn-primary">⏸️ Pause</button>
+                        <button id="reset" class="btn-secondary">🔄 Reset</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="explanation">
+            <h3>Understanding Wave Interference</h3>
+            <div class="explanation-grid">
+                <div class="explanation-card constructive">
+                    <h4>🌟 Constructive Interference</h4>
+                    <p>When waves meet and their peaks align, they add together to create <strong>brighter, more intense areas</strong>. The waves reinforce each other, creating maximum amplitude.</p>
+                </div>
+                <div class="explanation-card destructive">
+                    <h4>🌑 Destructive Interference</h4>
+                    <p>When a wave's peak meets another wave's trough, they cancel each other out, creating <strong>darker, quieter areas</strong>. The waves subtract from each other, reducing amplitude.</p>
+                </div>
+            </div>
+            <div class="physics-note">
+                <p><strong>Real-world examples:</strong> This same principle explains noise-canceling headphones, radio dead zones, and the colorful patterns in soap bubbles!</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

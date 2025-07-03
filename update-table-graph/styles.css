@@ -1,0 +1,612 @@
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
+
+/* CSS Variables for WWL Brand Colors */
+:root {
+    --orange-light: #ffa38b;
+    --orange-mid: #ff5c39;
+    --orange-dark: #73391d;
+    --red-light: #ffb3bb;
+    --red-mid: #f4364c;
+    --red-dark: #73262f;
+    --magenta-light: #cd9bcf;
+    --magenta-mid: #c73ecc;
+    --magenta-dark: #702573;
+    --blue-light: #8dc8e8;
+    --blue-mid: #0078d4;
+    --blue-dark: #2a446f;
+    --neutral-gray: #e8e6df;
+    --blueblack: #091f2c;
+    --off-white: #f4f3f5;
+    --black: #000000;
+    --white: #ffffff;
+}
+
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Patrick Hand', cursive;
+    background-color: var(--neutral-gray);
+    color: var(--blueblack);
+    min-height: 100vh;
+    padding-bottom: 120px; /* Space for fixed bottom controls */
+}
+
+/* Page Container */
+.page-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 120px); /* Full height minus bottom controls */
+}
+
+/* Intro Container (Step 0 only) */
+.intro-container {
+    display: none;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.8s ease, opacity 0.8s ease;
+}
+
+.intro-container.active {
+    display: flex;
+}
+
+/* Hypothesis Layout */
+.hypothesis-layout {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+    max-width: 800px;
+    text-align: center;
+    transition: all 0.8s ease;
+}
+
+.hypothesis-header h1 {
+    font-size: 3rem;
+    color: var(--blue-mid);
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.hypothesis-header p {
+    font-size: 1.8rem;
+    color: var(--blueblack);
+    margin-bottom: 30px;
+    font-style: italic;
+}
+
+.hypothesis-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    margin: 40px 0;
+    flex-wrap: wrap;
+}
+
+.weather-factors, .outcome-factor {
+    flex: 1;
+    min-width: 200px;
+}
+
+.weather-factors h3, .outcome-factor h3 {
+    font-size: 1.5rem;
+    color: var(--magenta-mid);
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.weather-icons {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.weather-item, .outcome-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 20px;
+    background: var(--off-white);
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.weather-item:hover, .outcome-item:hover {
+    transform: translateY(-3px);
+}
+
+.weather-item img, .outcome-item img {
+    width: 60px;
+    height: 60px;
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.weather-item span, .outcome-item span {
+    font-size: 1.1rem;
+    color: var(--blueblack);
+    font-weight: bold;
+}
+
+.hypothesis-arrow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    flex: 0.5;
+    min-width: 100px;
+}
+
+.question-mark {
+    font-size: 3rem;
+    color: var(--orange-mid);
+    font-weight: bold;
+    animation: questionPulse 2s ease-in-out infinite;
+}
+
+.arrow-line {
+    font-size: 2.5rem;
+    color: var(--magenta-mid);
+    font-weight: bold;
+}
+
+.hypothesis-footer {
+    margin-top: 30px;
+}
+
+.hypothesis-footer p {
+    font-size: 1.3rem;
+    color: var(--blue-dark);
+    opacity: 0.8;
+}
+
+@keyframes questionPulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.1); opacity: 0.8; }
+}
+
+/* Responsive design for hypothesis layout */
+@media (max-width: 768px) {
+    .hypothesis-layout {
+        padding: 30px 20px;
+        max-width: 95%;
+    }
+    
+    .hypothesis-header h1 {
+        font-size: 2.2rem;
+    }
+    
+    .hypothesis-header p {
+        font-size: 1.4rem;
+    }
+    
+    .hypothesis-content {
+        flex-direction: column;
+        gap: 30px;
+    }
+    
+    .weather-icons {
+        gap: 20px;
+    }
+    
+    .weather-item img, .outcome-item img {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+/* Main Content Container */
+.container {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+/* Table Container */
+.table-container {
+    flex: 0.8;
+    min-width: 250px;
+    max-width: 400px;
+    background: var(--white);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 24px;
+}
+
+#data-table th {
+    font-size: 32px;
+    padding: 15px;
+    text-align: center;
+    background-color: var(--off-white);
+    border-bottom: 2px solid var(--blueblack);
+    vertical-align: middle;
+}
+
+.header-icon {
+    width: 32px;
+    height: 32px;
+    display: block;
+    margin: 0 auto;
+}
+
+#data-table td {
+    padding: 12px 15px;
+    text-align: center;
+    border-bottom: 1px solid var(--neutral-gray);
+    transition: all 0.3s ease;
+    vertical-align: middle;
+}
+
+.data-row {
+    opacity: 0.3;
+    transform: translateX(-10px);
+    transition: all 0.5s ease;
+}
+
+.data-row.revealed {
+    opacity: 1;
+    transform: translateX(0);
+    background-color: var(--blue-light);
+}
+
+.data-row.revealed td {
+    animation: highlight 0.6s ease;
+}
+
+@keyframes highlight {
+    0% { background-color: var(--orange-light); }
+    50% { background-color: var(--red-light); }
+    100% { background-color: var(--blue-light); }
+}
+
+/* Graph Container */
+.graph-container {
+    flex: 1.2;
+    min-width: 400px;
+    background: var(--white);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#graph {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+/* Graph Text Styling */
+#graph text {
+    font-size: 32px; /* Larger axis labels */
+}
+
+#formula-text {
+    font-size: 28px !important; /* Larger formula text */
+}
+
+/* Data Point Animations */
+.data-point {
+    transition: all 0.4s ease;
+    cursor: pointer;
+    opacity: 0;
+    transform: translateX(-50px);
+}
+
+.data-point.revealed {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Regression Line Animation */
+#regression-line {
+    opacity: 1;
+    stroke-dasharray: 500;
+    stroke-dashoffset: 500;
+    transition: stroke-dashoffset 3s ease-in-out;
+}
+
+#regression-line.revealed {
+    stroke-dashoffset: 0;
+}
+
+/* Formula Text Animation */
+#formula-text {
+    opacity: 0;
+    transform: scale(0.5);
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+#formula-text.revealed {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Progress Controls (Fixed Bottom Bar) */
+.progress-controls {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--white);
+    border-top: 3px solid var(--blueblack);
+    padding: 20px;
+    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.step-counter {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: var(--blueblack);
+}
+
+.control-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+}
+
+.control-buttons button {
+    font-family: 'Patrick Hand', cursive;
+    font-size: 20px;
+    padding: 10px 20px;
+    border: 2px solid var(--blueblack);
+    background: var(--white);
+    color: var(--blueblack);
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 100px;
+}
+
+.control-buttons button:hover {
+    background: var(--blue-mid);
+    color: var(--white);
+    transform: translateY(-2px);
+}
+
+.control-buttons button:active {
+    transform: translateY(0);
+}
+
+.control-buttons button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Progress Bar */
+.progress-bar-container {
+    width: 100%;
+    height: 8px;
+    background: var(--neutral-gray);
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 0 auto;
+    max-width: 600px;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, 
+        var(--orange-mid) 0%, 
+        var(--red-mid) 33%, 
+        var(--magenta-mid) 66%, 
+        var(--blue-mid) 100%);
+    border-radius: 4px;
+    transition: width 0.5s ease;
+}
+
+/* Table-only layout for step 1 */
+.container.table-only {
+    justify-content: center;
+}
+
+.container.table-only .graph-container {
+    display: none;
+}
+
+.container.table-only .table-container {
+    /* Keep same dimensions as normal layout */
+    flex: 0.8;
+    min-width: 250px;
+    max-width: 400px;
+}
+
+/* Table drawing animation */
+.table-container.drawing-table {
+    position: relative;
+}
+
+/* Initial state - hide all table elements */
+.table-container.drawing-table #data-table {
+    opacity: 0;
+}
+
+.table-container.drawing-table #data-table th,
+.table-container.drawing-table #data-table td {
+    border-width: 0;
+    opacity: 0;
+}
+
+/* Table structure drawing animation */
+#data-table.table-drawn {
+    opacity: 1;
+    animation: tableStructureAppear 0.8s ease-out;
+}
+
+#data-table.table-drawn th {
+    animation: cellDraw 0.3s ease-out 0.5s both;
+}
+
+#data-table.table-drawn td {
+    animation: cellDraw 0.2s ease-out calc(0.8s + var(--cell-delay, 0s)) both;
+}
+
+/* Assign different delays to each table row */
+#data-table.table-drawn tr:nth-child(1) td { --cell-delay: 0s; }
+#data-table.table-drawn tr:nth-child(2) td { --cell-delay: 0.1s; }
+#data-table.table-drawn tr:nth-child(3) td { --cell-delay: 0.2s; }
+#data-table.table-drawn tr:nth-child(4) td { --cell-delay: 0.3s; }
+#data-table.table-drawn tr:nth-child(5) td { --cell-delay: 0.4s; }
+#data-table.table-drawn tr:nth-child(6) td { --cell-delay: 0.5s; }
+#data-table.table-drawn tr:nth-child(7) td { --cell-delay: 0.6s; }
+#data-table.table-drawn tr:nth-child(8) td { --cell-delay: 0.7s; }
+
+@keyframes tableStructureAppear {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes cellDraw {
+    0% {
+        opacity: 0;
+        border-width: 0;
+        transform: scale(0.8);
+    }
+    50% {
+        opacity: 0.7;
+        border-width: 1px;
+        transform: scale(1.02);
+    }
+    100% {
+        opacity: 1;
+        border-width: inherit;
+        transform: scale(1);
+    }
+}
+
+/* Complete drawing state */
+.table-container.drawing-complete {
+    animation: finalFocus 0.5s ease-out;
+}
+
+@keyframes finalFocus {
+    0% {
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transform: scale(1);
+    }
+    50% {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        transform: scale(1.01);
+    }
+    100% {
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transform: scale(1);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .page-container {
+        padding: 20px 10px;
+    }
+    
+    .graph-container {
+        min-width: 300px;
+    }
+    
+    .table-container {
+        min-width: 250px;
+        max-width: 350px;
+    }
+    
+    .control-buttons {
+        gap: 10px;
+    }
+    
+    .control-buttons button {
+        min-width: 80px;
+        font-size: 18px;
+        padding: 8px 15px;
+    }
+    
+    #data-table {
+        font-size: 20px;
+    }
+    
+    #data-table th {
+        font-size: 28px;
+        padding: 10px;
+    }
+    
+    .header-icon {
+        width: 28px;
+        height: 28px;
+        display: block;
+        margin: 0 auto;
+    }
+    
+    #data-table td {
+        padding: 8px 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding-bottom: 140px;
+    }
+    
+    .progress-controls {
+        padding: 15px;
+    }
+    
+    .step-counter {
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+    
+    .control-buttons button {
+        min-width: 70px;
+        font-size: 16px;
+        padding: 6px 12px;
+    }
+    
+    .header-icon {
+        width: 24px;
+        height: 24px;
+        display: block;
+        margin: 0 auto;
+    }
+}

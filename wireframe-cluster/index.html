@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K-Means Clustering Interactive Diagram</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>K-Means Clustering Algorithm</h1>
+            <p>Interactive visualization of unsupervised clustering</p>
+        </header>
+        
+        <div class="diagram-container">
+            <canvas id="clusterCanvas" width="800" height="600"></canvas>
+            
+            <!-- Control Panel -->
+            <div class="controls">
+                <div class="step-info">
+                    <span id="stepCounter">Step 1/6</span>
+                    <h3 id="stepTitle">Plot Unclustered Data Points</h3>
+                    <p id="stepDescription">Display flower icons at specific grid coordinates representing unlabeled data points.</p>
+                </div>
+                
+                <div class="control-buttons">
+                    <button id="playPauseBtn" class="control-btn">
+                        <span id="playPauseIcon">⏸️</span> Pause
+                    </button>
+                    <button id="prevBtn" class="control-btn">⏮️ Previous</button>
+                    <button id="nextBtn" class="control-btn">Next ⏭️</button>
+                    <button id="resetBtn" class="control-btn">🔄 Reset</button>
+                </div>
+                
+                <div class="progress-bar">
+                    <div id="progressFill" class="progress-fill"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Legend -->
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-color centroid-color"></div>
+                <span>Centroids</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color cluster1-color"></div>
+                <span>Cluster 1</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color cluster2-color"></div>
+                <span>Cluster 2</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color cluster3-color"></div>
+                <span>Cluster 3</span>
+            </div>
+        </div>
+        
+        <div class="info-panel">
+            <h3>About K-Means Clustering</h3>
+            <p>K-Means is an unsupervised machine learning algorithm that groups data points into clusters. 
+               The algorithm iteratively refines cluster assignments until convergence is reached.</p>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

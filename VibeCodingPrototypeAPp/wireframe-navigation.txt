@@ -1,0 +1,7 @@
++-------------------+      +-----+
+| Products          |      | PR  |
+| ProductDetails    |      | PD  |
+| ShoppingCart      |      | SC  |
+| Checkout          |      | CO  |
++-------------------+      +-----+
+(Full width)             (Collapsed <300px)

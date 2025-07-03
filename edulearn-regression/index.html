@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Regression Line Fitting - Temperature vs Ice Cream Sales</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Interactive Regression Line Fitting</h1>
+            <p class="subtitle">Explore how linear regression finds the best line through data points</p>
+        </header>
+
+        <div class="main-content">
+            <!-- Left Panel: Controls and Information -->
+            <div class="control-panel">
+                <div class="info-section">
+                    <h2>What is Linear Regression?</h2>
+                    <p>Linear regression finds the "best fit" line through a set of data points by minimizing the sum of squared errors (residuals). The residual is the vertical distance between each data point and the regression line.</p>
+                </div>
+
+                <div class="controls-section">
+                    <h3>Adjust the Line</h3>
+                    
+                    <div class="slider-group">
+                        <label for="slope-slider">
+                            <span class="slider-label">Slope (m):</span>
+                            <span class="slider-value" id="slope-value">10.0</span>
+                        </label>
+                        <input type="range" id="slope-slider" min="5" max="20" step="0.5" value="10.0">
+                    </div>
+
+                    <div class="slider-group">
+                        <label for="intercept-slider">
+                            <span class="slider-label">Y-Intercept (b):</span>
+                            <span class="slider-value" id="intercept-value">-250</span>
+                        </label>
+                        <input type="range" id="intercept-slider" min="-500" max="0" step="25" value="-250">
+                    </div>
+
+                    <div class="equation-display">
+                        <h4>Current Equation:</h4>
+                        <div class="equation" id="equation">y = 10.0x + (-250)</div>
+                    </div>
+
+                    <button id="best-fit-btn" class="best-fit-button">Find Best Fit Line</button>
+                    <button id="reset-btn" class="reset-button">Reset</button>
+                </div>
+
+                <div class="error-section">
+                    <h3>Error Metrics</h3>
+                    <div class="metric">
+                        <span class="metric-label">Sum of Squared Residuals:</span>
+                        <span class="metric-value" id="sse-value">0</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">Root Mean Square Error:</span>
+                        <span class="metric-value" id="rmse-value">0</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">R² (Coefficient of Determination):</span>
+                        <span class="metric-value" id="r2-value">0</span>
+                    </div>
+                </div>
+
+                <div class="legend-section">
+                    <h3>Legend</h3>
+                    <div class="legend-item">
+                        <div class="legend-color data-point"></div>
+                        <span>Data Points</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color regression-line"></div>
+                        <span>Your Regression Line</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color best-fit-line"></div>
+                        <span>Best Fit Line</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color residual-line"></div>
+                        <span>Residuals (Errors)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Panel: Interactive Plot -->
+            <div class="plot-container">
+                <div class="plot-header">
+                    <h3>Temperature vs Ice Cream Sales</h3>
+                    <div class="plot-controls">
+                        <label>
+                            <input type="checkbox" id="show-residuals" checked>
+                            Show Residuals
+                        </label>
+                        <label>
+                            <input type="checkbox" id="show-best-fit">
+                            Show Best Fit Line
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="plot-wrapper">
+                    <svg id="plot-svg" viewBox="0 0 600 400">
+                        <!-- Axes -->
+                        <g id="axes">
+                            <!-- X-axis -->
+                            <line x1="60" y1="350" x2="580" y2="350" stroke="#333" stroke-width="2"/>
+                            <!-- Y-axis -->
+                            <line x1="60" y1="350" x2="60" y2="30" stroke="#333" stroke-width="2"/>
+                        </g>
+                        
+                        <!-- Axis labels and ticks will be added by JavaScript -->
+                        <g id="axis-labels"></g>
+                        <g id="axis-ticks"></g>
+                        
+                        <!-- Best fit line (hidden by default) -->
+                        <line id="best-fit-line" class="best-fit-line-svg" style="display: none;"/>
+                        
+                        <!-- User's regression line -->
+                        <line id="regression-line" class="regression-line-svg"/>
+                        
+                        <!-- Residual lines -->
+                        <g id="residuals"></g>
+                        
+                        <!-- Data points -->
+                        <g id="data-points"></g>
+                    </svg>
+                    
+                    <!-- Axis titles -->
+                    <div class="axis-title x-axis-title">x</div>
+                    <div class="axis-title y-axis-title">y</div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="instructions">
+                <h3>How to Use:</h3>
+                <ol>
+                    <li>Adjust the slope and intercept sliders to move the regression line</li>
+                    <li>Watch how the error metrics change as you adjust the line</li>
+                    <li>Try to minimize the Sum of Squared Residuals by finding the best line</li>
+                    <li>Click "Find Best Fit Line" to see the mathematically optimal solution</li>
+                    <li>Toggle options to show/hide residuals and the best fit line</li>
+                </ol>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

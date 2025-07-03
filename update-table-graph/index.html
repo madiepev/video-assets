@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature vs Ice Cream</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="page-container">
+        <!-- Intro step layout (step 0 only) -->
+        <div class="intro-container" id="intro-container">
+            <div class="hypothesis-layout">
+                <div class="hypothesis-header">
+                    <h1>Research Question</h1>
+                    <p>Does weather affect ice cream sales?</p>
+                </div>
+                
+                <div class="hypothesis-content">
+                    <div class="weather-factors">
+                        <h3>Weather Factors</h3>
+                        <div class="weather-icons">
+                            <div class="weather-item">
+                                <img src="images/temperature.svg" alt="Temperature" />
+                                <span>Temperature</span>
+                            </div>
+                            <div class="weather-item">
+                                <img src="images/rain.svg" alt="Rain" />
+                                <span>Rainfall</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="hypothesis-arrow">
+                        <div class="question-mark">?</div>
+                        <div class="arrow-line">→</div>
+                    </div>
+                    
+                    <div class="outcome-factor">
+                        <h3>Sales Outcome</h3>
+                        <div class="outcome-item">
+                            <img src="images/icecream.svg" alt="Ice Cream" />
+                            <span>Ice Cream Sales</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="hypothesis-footer">
+                    <p><em>Let's explore the data to find out...</em></p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Main data visualization layout (steps 1+) -->
+        <div class="container" id="main-container">
+            <div class="table-container">
+                <table id="data-table">
+                    <thead>
+                        <tr>
+                            <th><img src="images/temperature.svg" alt="Temperature" class="header-icon" /></th>
+                            <th><img src="images/icecream.svg" alt="Ice Cream" class="header-icon" /></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="data-row" data-temp="21" data-icecream="93">
+                            <td>21°C</td>
+                            <td>93</td>
+                        </tr>
+                        <tr class="data-row" data-temp="17" data-icecream="87">
+                            <td>17°C</td>
+                            <td>87</td>
+                        </tr>
+                        <tr class="data-row" data-temp="11" data-icecream="56">
+                            <td>11°C</td>
+                            <td>56</td>
+                        </tr>
+                        <tr class="data-row" data-temp="26" data-icecream="102">
+                            <td>26°C</td>
+                            <td>102</td>
+                        </tr>
+                        <tr class="data-row" data-temp="22" data-icecream="103">
+                            <td>22°C</td>
+                            <td>103</td>
+                        </tr>
+                        <tr class="data-row" data-temp="19" data-icecream="101">
+                            <td>19°C</td>
+                            <td>101</td>
+                        </tr>
+                        <tr class="data-row" data-temp="31" data-icecream="127">
+                            <td>31°C</td>
+                            <td>127</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="graph-container">
+                <svg id="graph" viewBox="0 0 600 500" width="600" height="500">
+                    <!-- White background -->
+                    <rect width="600" height="500" fill="white"/>
+                    
+                    <!-- Y-axis -->
+                    <line x1="60" y1="60" x2="60" y2="420" stroke="#091f2c" stroke-width="2"/>
+                    
+                    <!-- X-axis -->
+                    <line x1="60" y1="420" x2="540" y2="420" stroke="#091f2c" stroke-width="2"/>
+                    
+                    <!-- Axis labels -->
+                    <text x="30" y="70" font-family="Patrick Hand, cursive" font-size="32" fill="#091f2c">y</text>
+                    <text x="530" y="445" font-family="Patrick Hand, cursive" font-size="32" fill="#091f2c">x</text>
+                    
+                    <!-- Data points (initially hidden) -->
+                    <g id="data-points">
+                        <circle class="data-point" data-index="0" cx="261" cy="220" r="8" fill="#0078d4" opacity="0"/>
+                        <circle class="data-point" data-index="1" cx="223" cy="240" r="8" fill="#0078d4" opacity="0"/>
+                        <circle class="data-point" data-index="2" cx="146" cy="295" r="8" fill="#0078d4" opacity="0"/>
+                        <circle class="data-point" data-index="3" cx="319" cy="213" r="8" fill="#0078d4" opacity="0"/>
+                        <circle class="data-point" data-index="4" cx="281" cy="210" r="8" fill="#0078d4" opacity="0"/>
+                        <circle class="data-point" data-index="5" cx="242" cy="214" r="8" fill="#0078d4" opacity="0"/>
+                        <circle class="data-point" data-index="6" cx="415" cy="140" r="8" fill="#0078d4" opacity="0"/>
+                    </g>
+                    
+                    <!-- Regression line (initially hidden) -->
+                    <line id="regression-line" x1="110" y1="320" x2="460" y2="110" stroke="#ff5c39" stroke-width="3" opacity="0" stroke-dasharray="5,5"/>
+                    
+                    <!-- Formula text (initially hidden) -->
+                    <text id="formula-text" x="280" y="280" font-family="Patrick Hand, cursive" font-size="28" fill="#ff5c39" opacity="0" text-anchor="middle">
+                        ŷ = f(x)
+                    </text>
+                </svg>
+            </div>
+        </div>
+    </div>
+    
+    <div class="progress-controls">
+        <div class="step-counter">
+            <span id="step-text">Step 0 / 11</span>
+        </div>
+        
+        <div class="control-buttons">
+            <button id="prev-btn">Previous</button>
+            <button id="play-btn">Play</button>
+            <button id="next-btn">Next</button>
+            <button id="reset-btn">Reset</button>
+        </div>
+        
+        <div class="progress-bar-container">
+            <div id="progress-bar" class="progress-bar"></div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

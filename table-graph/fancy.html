@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Temperature vs Ice Cream - Combined View</title>
+  <style>
+    body {
+      background: #F4F4F4;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      padding: 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      gap: 3rem;
+    }
+
+    .container {
+      display: flex;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .table-container {
+      border-radius: 12px;
+      padding: 0;
+      max-width: 350px;
+      background-color: #ffffff;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      overflow: hidden;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+
+    th, td {
+      text-align: center;
+      padding: 12px 16px;
+      vertical-align: middle;
+    }
+
+    th {
+      background: linear-gradient(135deg, #4F46E5, #7C3AED);
+      color: white;
+      font-weight: 600;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border: none;
+    }
+
+    th img {
+      width: 20px;
+      height: 20px;
+      vertical-align: middle;
+      filter: brightness(0) saturate(100%) invert(100%);
+      margin-right: 6px;
+    }
+
+    tbody tr {
+      background: white;
+    }
+
+    tbody tr:nth-child(even) {
+      background: #f8f9fa;
+    }
+
+    tbody tr:hover {
+      background: #e3f2fd;
+      transition: background-color 0.2s ease;
+    }
+
+    td {
+      color: #2c3e50;
+      font-weight: 500;
+      border: none;
+      border-bottom: 1px solid #e9ecef;
+    }
+
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* Temperature styling with badges */
+    tbody tr:nth-child(1) td:first-child, /* 21°C */
+    tbody tr:nth-child(5) td:first-child, /* 22°C */
+    tbody tr:nth-child(6) td:first-child { /* 19°C */
+      color: #d32f2f;
+    }
+
+    tbody tr:nth-child(2) td:first-child { /* 17°C */
+      color: #f57c00;
+    }
+
+    tbody tr:nth-child(3) td:first-child { /* 11°C */
+      color: #1976d2;
+    }
+
+    tbody tr:nth-child(4) td:first-child, /* 26°C */
+    tbody tr:nth-child(7) td:first-child { /* 31°C */
+      color: #c62828;
+      font-weight: 600;
+    }
+
+    /* Sales styling with badges */
+    tbody tr:nth-child(3) td:last-child { /* 56 - LOW */
+      color: #1976d2;
+    }
+
+    tbody tr:nth-child(1) td:last-child, /* 93 - MED */
+    tbody tr:nth-child(2) td:last-child, /* 87 - MED */
+    tbody tr:nth-child(4) td:last-child, /* 102 - MED */
+    tbody tr:nth-child(5) td:last-child, /* 103 - MED */
+    tbody tr:nth-child(6) td:last-child { /* 101 - MED */
+      color: #1565c0;
+    }
+
+    tbody tr:nth-child(7) td:last-child { /* 127 - HIGH */
+      color: #0d47a1;
+      font-weight: 600;
+    }
+
+    tr {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.6s ease forwards;
+    }
+
+    thead tr {
+      opacity: 1;
+      transform: translateY(0);
+      animation: none;
+    }
+
+    tbody tr:nth-child(1) { animation-delay: 0.2s; }
+    tbody tr:nth-child(2) { animation-delay: 0.4s; }
+    tbody tr:nth-child(3) { animation-delay: 0.6s; }
+    tbody tr:nth-child(4) { animation-delay: 0.8s; }
+    tbody tr:nth-child(5) { animation-delay: 1.0s; }
+    tbody tr:nth-child(6) { animation-delay: 1.2s; }
+    tbody tr:nth-child(7) { animation-delay: 1.4s; }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .graph-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    svg {
+      width: 500px;
+      height: 400px;
+      background-color: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .dot {
+      fill: #1565c0;
+      stroke: #ffffff;
+      stroke-width: 2;
+      r: 0;
+      animation: pop 0.4s ease-out forwards;
+    }
+
+    @keyframes pop {
+      from {
+        r: 0;
+        opacity: 0;
+      }
+      to {
+        r: 6;
+        opacity: 1;
+      }
+    }
+
+    text {
+      font-size: 18px;
+      fill: #2c3e50;
+      font-weight: 600;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <!-- Table Section -->
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th><img src="images/temperature.svg" alt="Temperature" /></th>
+          <th><img src="images/icecream.svg" alt="Ice Cream" /></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>21°C</td><td>93</td></tr>
+        <tr><td>17°C</td><td>87</td></tr>
+        <tr><td>11°C</td><td>56</td></tr>
+        <tr><td>26°C</td><td>102</td></tr>
+        <tr><td>22°C</td><td>103</td></tr>
+        <tr><td>19°C</td><td>101</td></tr>
+        <tr><td>31°C</td><td>127</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Graph Section -->
+  <div class="graph-container">
+    <svg viewBox="0 0 500 400">
+      <!-- Axes -->
+      <line x1="80" y1="300" x2="420" y2="300" stroke="black" stroke-width="3"/>
+      <line x1="100" y1="320" x2="100" y2="60" stroke="black" stroke-width="3"/>
+
+      <!-- Labels -->
+      <text x="65" y="70">y</text>
+      <text x="410" y="325">x</text>
+
+      <!-- Dots (temperature vs ice cream sold) -->
+      <circle class="dot" cx="200" cy="180" style="animation-delay: 2.0s" />  <!-- 21°C, 93 -->
+      <circle class="dot" cx="170" cy="190" style="animation-delay: 2.8s" />  <!-- 17°C, 87 -->
+      <circle class="dot" cx="130" cy="240" style="animation-delay: 3.6s" />  <!-- 11°C, 56 -->
+      <circle class="dot" cx="230" cy="170" style="animation-delay: 4.4s" />  <!-- 26°C, 102 -->
+      <circle class="dot" cx="210" cy="165" style="animation-delay: 5.2s" />  <!-- 22°C, 103 -->
+      <circle class="dot" cx="185" cy="175" style="animation-delay: 6.0s" />  <!-- 19°C, 101 -->
+      <circle class="dot" cx="280" cy="140" style="animation-delay: 6.8s" />  <!-- 31°C, 127 -->
+    </svg>
+  </div>
+</div>
+
+</body>
+</html>

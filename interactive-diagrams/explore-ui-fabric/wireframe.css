@@ -1,0 +1,485 @@
+/* Low-Fidelity Wireframe Styles */
+
+/* Reset and Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Courier New', monospace;
+    line-height: 1.4;
+    background: #f5f5f5;
+    color: #333;
+}
+
+/* Wireframe Container */
+.wireframe-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background: white;
+    border: 2px solid #333;
+    min-height: 100vh;
+}
+
+/* Header */
+.wireframe-header {
+    border-bottom: 2px solid #333;
+    padding: 15px 0;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.logo-placeholder {
+    display: inline-block;
+    padding: 5px 15px;
+    border: 1px dashed #666;
+    background: #eee;
+    margin-bottom: 10px;
+}
+
+.wireframe-header h1 {
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.instructions {
+    font-size: 0.9rem;
+    color: #666;
+    font-style: italic;
+}
+
+/* Interface Mockup */
+.interface-mockup {
+    border: 2px solid #333;
+    background: white;
+    margin-bottom: 20px;
+}
+
+/* Navigation Bar */
+.nav-bar {
+    display: flex;
+    border-bottom: 1px solid #333;
+    background: #f9f9f9;
+    padding: 10px;
+    gap: 15px;
+    align-items: center;
+}
+
+.nav-item {
+    position: relative;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.nav-app-switcher {
+    width: 80px;
+}
+
+.nav-search {
+    flex: 1;
+    max-width: 300px;
+}
+
+.nav-account {
+    width: 120px;
+}
+
+.search-box {
+    height: 35px !important;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+}
+
+/* Main Content */
+.main-content {
+    display: grid;
+    grid-template-columns: 200px 1fr 150px;
+    gap: 1px;
+    background: #333;
+    min-height: 400px;
+}
+
+/* Sidebar */
+.sidebar {
+    background: white;
+    padding: 15px;
+}
+
+.sidebar-section {
+    position: relative;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.section-title {
+    font-weight: bold;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+}
+
+.list-item {
+    padding: 4px 0;
+    border-bottom: 1px dotted #ccc;
+    font-size: 0.9rem;
+}
+
+/* Content Area */
+.content-area {
+    background: white;
+    padding: 15px;
+}
+
+.content-header {
+    position: relative;
+    margin-bottom: 15px;
+    cursor: pointer;
+}
+
+.breadcrumbs {
+    font-size: 0.8rem;
+    color: #666;
+    padding: 8px;
+}
+
+.content-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 15px;
+}
+
+.grid-item {
+    position: relative;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.item-icon {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+}
+
+.item-title {
+    font-weight: bold;
+    font-size: 0.9rem;
+    margin-bottom: 3px;
+}
+
+.item-meta {
+    font-size: 0.7rem;
+    color: #666;
+}
+
+/* Right Panel */
+.right-panel {
+    background: white;
+    padding: 15px;
+    position: relative;
+    cursor: pointer;
+}
+
+.context-item {
+    padding: 4px 0;
+    border-bottom: 1px dotted #ccc;
+    font-size: 0.8rem;
+}
+
+/* Experience Bar */
+.experience-bar {
+    border-top: 1px solid #333;
+    background: #f9f9f9;
+    padding: 10px;
+    position: relative;
+    cursor: pointer;
+}
+
+.experience-item {
+    display: inline-block;
+    padding: 5px 10px;
+    margin-right: 10px;
+    border: 1px solid #999;
+    background: white;
+    font-size: 0.8rem;
+    cursor: pointer;
+}
+
+.experience-item.active {
+    background: #333;
+    color: white;
+}
+
+/* Placeholder Boxes */
+.placeholder-box {
+    border: 1px dashed #666;
+    background: #fafafa;
+    padding: 8px;
+    min-height: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+}
+
+/* Hotspot Numbers */
+.hotspot-number {
+    position: absolute;
+    top: -8px;
+    left: -8px;
+    width: 20px;
+    height: 20px;
+    background: #ff4757;
+    color: white;
+    border-radius: 50%;
+    font-size: 0.7rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid white;
+    z-index: 10;
+    animation: pulse-wireframe 2s infinite;
+}
+
+@keyframes pulse-wireframe {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+/* Hover Effects */
+[data-hotspot]:hover {
+    transform: translateY(-2px);
+}
+
+[data-hotspot]:hover .placeholder-box {
+    background: #e8f4fd;
+    border-color: #007bff;
+}
+
+[data-hotspot]:hover .hotspot-number {
+    background: #007bff;
+    transform: scale(1.2);
+}
+
+/* Information Panel */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.info-panel {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9);
+    background: white;
+    border: 3px solid #333;
+    width: 90%;
+    max-width: 500px;
+    max-height: 70vh;
+    overflow-y: auto;
+    z-index: 1001;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.info-panel.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.panel-header {
+    background: #f9f9f9;
+    border-bottom: 2px solid #333;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.panel-header h3 {
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.close-btn {
+    background: none;
+    border: 2px solid #333;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.close-btn:hover {
+    background: #333;
+    color: white;
+}
+
+.panel-content {
+    padding: 20px;
+}
+
+.panel-content h4 {
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 5px;
+}
+
+.panel-content p {
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+
+.panel-content ul {
+    margin-left: 20px;
+    margin-bottom: 15px;
+}
+
+.panel-content li {
+    margin-bottom: 5px;
+}
+
+.highlight-wireframe {
+    background: #ffffcc;
+    padding: 2px 4px;
+    border: 1px dashed #999;
+}
+
+/* Legend */
+.wireframe-legend {
+    border: 2px solid #333;
+    background: #f9f9f9;
+    padding: 15px;
+    margin-top: 20px;
+}
+
+.wireframe-legend h3 {
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    font-size: 1rem;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+}
+
+.legend-number {
+    width: 20px;
+    height: 20px;
+    background: #ff4757;
+    color: white;
+    border-radius: 50%;
+    font-size: 0.7rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+    border: 2px solid white;
+}
+
+.legend-box {
+    width: 20px;
+    height: 15px;
+    border: 1px dashed #666;
+    background: #fafafa;
+    margin-right: 10px;
+}
+
+.legend-text {
+    font-family: 'Courier New', monospace;
+    background: #eee;
+    padding: 2px 6px;
+    border: 1px solid #999;
+    margin-right: 10px;
+    font-size: 0.8rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .wireframe-container {
+        padding: 10px;
+    }
+    
+    .main-content {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto;
+    }
+    
+    .nav-bar {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .nav-search {
+        max-width: 100%;
+    }
+    
+    .content-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .experience-bar {
+        text-align: center;
+    }
+    
+    .experience-item {
+        display: block;
+        margin: 5px 0;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .hotspot-number {
+        animation: none;
+    }
+    
+    .info-panel, .overlay {
+        display: none;
+    }
+    
+    .wireframe-container {
+        border: 1px solid #333;
+    }
+}
+
+/* Accessibility */
+[data-hotspot]:focus {
+    outline: 3px solid #007bff;
+    outline-offset: 2px;
+}
+
+[data-hotspot]:focus .hotspot-number {
+    background: #007bff;
+    transform: scale(1.2);
+}

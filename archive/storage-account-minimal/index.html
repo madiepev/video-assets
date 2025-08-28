@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Azure Storage Account - Minimal Guide</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Azure Storage Account</h1>
+            <div class="progress">
+                <span class="step-text">Step <span id="current">1</span> of 7</span>
+                <div class="progress-line">
+                    <div class="progress-active" id="progress"></div>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <!-- Step 1 -->
+            <section class="step active" id="step-1">
+                <h2>Storage Account</h2>
+                <p>A unique namespace for your Azure data storage.</p>
+                <div class="visual-minimal">
+                    <div class="account-box">
+                        <div class="icon">□</div>
+                        <span>mystorageaccount.core.windows.net</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Step 2 -->
+            <section class="step" id="step-2">
+                <h2>Performance Tiers</h2>
+                <p>Standard or Premium performance options.</p>
+                <div class="visual-minimal">
+                    <div class="tier-grid">
+                        <div class="tier">
+                            <span class="tier-label">Standard</span>
+                            <span class="tier-desc">Cost-effective</span>
+                        </div>
+                        <div class="tier">
+                            <span class="tier-label">Premium</span>
+                            <span class="tier-desc">High performance</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Step 3 -->
+            <section class="step" id="step-3">
+                <h2>Storage Services</h2>
+                <p>Four core storage services for different data types.</p>
+                <div class="visual-minimal">
+                    <div class="services-list">
+                        <div class="service">Blob</div>
+                        <div class="service">Files</div>
+                        <div class="service">Queues</div>
+                        <div class="service">Tables</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Step 4 -->
+            <section class="step" id="step-4">
+                <h2>Blob Containers</h2>
+                <p>Organize blobs into logical containers.</p>
+                <div class="visual-minimal">
+                    <div class="container-list">
+                        <div class="container-item">images</div>
+                        <div class="container-item">documents</div>
+                        <div class="container-item">backups</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Step 5 -->
+            <section class="step" id="step-5">
+                <h2>Blob Types</h2>
+                <p>Three types for different use cases.</p>
+                <div class="visual-minimal">
+                    <div class="blob-types">
+                        <div class="blob-type">
+                            <span>Block</span>
+                            <small>General files</small>
+                        </div>
+                        <div class="blob-type">
+                            <span>Page</span>
+                            <small>VHD files</small>
+                        </div>
+                        <div class="blob-type">
+                            <span>Append</span>
+                            <small>Log files</small>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Step 6 -->
+            <section class="step" id="step-6">
+                <h2>Access Tiers</h2>
+                <p>Optimize costs based on access frequency.</p>
+                <div class="visual-minimal">
+                    <div class="tiers-line">
+                        <div class="tier-point">Hot</div>
+                        <div class="tier-point">Cool</div>
+                        <div class="tier-point">Cold</div>
+                        <div class="tier-point">Archive</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Step 7 -->
+            <section class="step" id="step-7">
+                <h2>Overview</h2>
+                <p>Complete Azure Storage Account architecture.</p>
+                <div class="visual-minimal">
+                    <div class="overview-summary">
+                        <div class="summary-item">2 Performance Tiers</div>
+                        <div class="summary-item">4 Storage Services</div>
+                        <div class="summary-item">3 Blob Types</div>
+                        <div class="summary-item">4 Access Tiers</div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <nav class="controls">
+            <button id="prev" disabled>← Previous</button>
+            <button id="next">Next →</button>
+        </nav>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

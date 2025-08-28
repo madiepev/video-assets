@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test - Azure AI Foundry Tutorial</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: #f8f9fa;
+        }
+        .card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 1rem;
+        }
+        .button {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 0.5rem;
+            transition: background 0.3s;
+        }
+        .button:hover {
+            background: #2980b9;
+        }
+        .status {
+            padding: 1rem;
+            border-radius: 5px;
+            margin: 1rem 0;
+        }
+        .success { background: #d4edda; border: 1px solid #c3e6cb; color: #155724; }
+        .info { background: #d1ecf1; border: 1px solid #bee5eb; color: #0c5460; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>🧪 Azure AI Foundry Interactive Tutorial - Test Page</h1>
+        <p>This page helps verify that your tutorial is set up correctly.</p>
+    </div>
+
+    <div class="card">
+        <h2>📁 File Structure Check</h2>
+        <div id="file-check" class="status info">
+            Checking file structure...
+        </div>
+        <ul>
+            <li><span id="html-check">❓</span> index.html</li>
+            <li><span id="css-check">❓</span> styles.css</li>
+            <li><span id="js-check">❓</span> script.js</li>
+            <li><span id="img-check">❓</span> foundry-home-page.png</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2>🚀 Launch Tutorial</h2>
+        <p>If all files are properly set up, click below to launch the interactive tutorial:</p>
+        <a href="index.html" class="button">Launch Azure AI Foundry Tutorial →</a>
+    </div>
+
+    <div class="card">
+        <h2>📚 GitHub Pages Setup</h2>
+        <div class="status info">
+            <strong>To deploy this tutorial on GitHub Pages:</strong>
+            <ol>
+                <li>Push this folder to your GitHub repository</li>
+                <li>Go to Settings → Pages in your repository</li>
+                <li>Select your source branch (main/master)</li>
+                <li>Choose root folder or the specific directory</li>
+                <li>Your tutorial will be live at: <code>https://yourusername.github.io/yourrepo/interactive-diagrams/explore-ui-foundry/</code></li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>🎯 Tutorial Features</h2>
+        <ul>
+            <li>✅ Interactive highlighted overlays (not hotspots)</li>
+            <li>✅ Click-to-learn explanations at bottom</li>
+            <li>✅ Navigation controls (Previous/Next/Reset)</li>
+            <li>✅ Auto-tour functionality</li>
+            <li>✅ Progress tracking</li>
+            <li>✅ Keyboard accessibility</li>
+            <li>✅ Mobile responsive design</li>
+        </ul>
+    </div>
+
+    <script>
+        // Simple file existence check
+        function checkFile(filename, elementId) {
+            fetch(filename)
+                .then(response => {
+                    const element = document.getElementById(elementId);
+                    if (response.ok) {
+                        element.textContent = "✅";
+                        element.style.color = "green";
+                    } else {
+                        element.textContent = "❌";
+                        element.style.color = "red";
+                    }
+                })
+                .catch(() => {
+                    const element = document.getElementById(elementId);
+                    element.textContent = "❌";
+                    element.style.color = "red";
+                });
+        }
+
+        // Check all files
+        document.addEventListener('DOMContentLoaded', () => {
+            checkFile('index.html', 'html-check');
+            checkFile('styles.css', 'css-check');
+            checkFile('script.js', 'js-check');
+            checkFile('foundry-home-page.png', 'img-check');
+
+            // Update status message
+            setTimeout(() => {
+                document.getElementById('file-check').innerHTML = 
+                    '<strong>File check complete!</strong> Green checkmarks (✅) indicate files are accessible.';
+                document.getElementById('file-check').className = 'status success';
+            }, 2000);
+        });
+    </script>
+</body>
+</html>

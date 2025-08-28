@@ -1,0 +1,54 @@
+name: Deploy Interactive Fabric Explorer
+
+on:
+  push:
+    branches: [ main, master ]
+    paths: 
+      - 'interactive-diagrams/explore-ui/**'
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        
+    - name: Validate HTML
+      run: |
+        npx html-validate interactive-diagrams/explore-ui/index.html || true
+        
+    - name: Validate CSS
+      run: |
+        npx stylelint interactive-diagrams/explore-ui/styles.css || true
+        
+    - name: Check JavaScript syntax
+      run: |
+        node -c interactive-diagrams/explore-ui/script.js
+        
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./interactive-diagrams/explore-ui
+        destination_dir: fabric-explorer
+        
+    - name: Comment deployment URL
+      uses: actions/github-script@v7
+      if: github.event_name == 'pull_request'
+      with:
+        script: |
+          github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: '🚀 Preview deployment will be available at: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/fabric-explorer/'
+          })

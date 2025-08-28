@@ -1,0 +1,106 @@
+{
+  "metadata": {
+    "title": "Interactive Fabric Interface Explorer",
+    "description": "Explore Microsoft Fabric's interface components",
+    "version": "1.0.0",
+    "image": "fabric-notes.png"
+  },
+  "hotspots": [
+    {
+      "id": "app-switcher",
+      "position": {
+        "top": "15%",
+        "left": "2%"
+      },
+      "title": "Microsoft 365 App Switcher",
+      "category": "Navigation",
+      "description": "Access all Microsoft 365 applications"
+    },
+    {
+      "id": "search",
+      "position": {
+        "top": "12%",
+        "left": "45%"
+      },
+      "title": "Universal Search",
+      "category": "Discovery",
+      "description": "Search across all workspaces and artifacts"
+    },
+    {
+      "id": "trial",
+      "position": {
+        "top": "8%",
+        "right": "15%"
+      },
+      "title": "Free Trial Information",
+      "category": "Account",
+      "description": "Trial status and feedback options"
+    },
+    {
+      "id": "browse",
+      "position": {
+        "top": "40%",
+        "left": "5%"
+      },
+      "title": "Browse Section",
+      "category": "Content",
+      "description": "Discover and organize your content"
+    },
+    {
+      "id": "workspaces",
+      "position": {
+        "top": "50%",
+        "left": "20%"
+      },
+      "title": "Workspaces Navigation",
+      "category": "Organization",
+      "description": "Manage and switch between workspaces"
+    },
+    {
+      "id": "artifacts",
+      "position": {
+        "top": "45%",
+        "left": "65%"
+      },
+      "title": "Open Artifacts",
+      "category": "Content",
+      "description": "View currently active items"
+    },
+    {
+      "id": "experiences",
+      "position": {
+        "bottom": "25%",
+        "left": "20%"
+      },
+      "title": "Product Experiences",
+      "category": "Features",
+      "description": "Access different Fabric capabilities"
+    },
+    {
+      "id": "ui-context",
+      "position": {
+        "top": "60%",
+        "right": "10%"
+      },
+      "title": "Dynamic UI Context",
+      "category": "Interface",
+      "description": "Context-aware interface changes"
+    }
+  ],
+  "styling": {
+    "primaryColor": "#667eea",
+    "accentColor": "#ff6b6b",
+    "backgroundColor": "#f8f9fa",
+    "fontFamily": "Segoe UI, Tahoma, Geneva, Verdana, sans-serif"
+  },
+  "features": {
+    "enableKeyboardNavigation": true,
+    "enableTooltips": true,
+    "enableAnalytics": false,
+    "enableOfflineMode": false,
+    "responsiveBreakpoints": {
+      "mobile": "768px",
+      "tablet": "1024px"
+    }
+  }
+}

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Azure AI Foundry Interface Guide</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Azure AI Foundry Interface Tutorial</h1>
+        <p>Click on the numbered hotspots to learn about different features and components</p>
+    </header>
+
+    <main>
+        <div class="tutorial-container">
+            <!-- Laptop-style screenshot container -->
+            <div class="laptop-container">
+                <div class="laptop-screen">
+                    <div class="screenshot-container">
+                        <img src="foundry-home-page.png" alt="Azure AI Foundry Interface" class="screenshot">
+                        
+                        <!-- Hotspot markers -->
+                        <div class="hotspot" data-section="project-name" style="top: 6%; left: 25%;" data-number="1">
+                            <div class="hotspot-marker">1</div>
+                            <div class="hotspot-tooltip">Project Name</div>
+                        </div>
+                        
+                        <div class="hotspot" data-section="navigation-menu" style="top: 25%; left: 8%;" data-number="2">
+                            <div class="hotspot-marker">2</div>
+                            <div class="hotspot-tooltip">Navigation Menu</div>
+                        </div>
+                        
+                        <div class="hotspot" data-section="api-key" style="top: 22%; left: 42%;" data-number="3">
+                            <div class="hotspot-marker">3</div>
+                            <div class="hotspot-tooltip">API Key & Endpoints</div>
+                        </div>
+                        
+                        <div class="hotspot" data-section="azure-openai" style="top: 42%; left: 42%;" data-number="4">
+                            <div class="hotspot-marker">4</div>
+                            <div class="hotspot-tooltip">Azure OpenAI Endpoint</div>
+                        </div>
+                        
+                        <div class="hotspot" data-section="project-details" style="top: 30%; left: 83%;" data-number="5">
+                            <div class="hotspot-marker">5</div>
+                            <div class="hotspot-tooltip">Project Details</div>
+                        </div>
+                        
+                        <div class="hotspot" data-section="getting-started" style="top: 75%; left: 57%;" data-number="6">
+                            <div class="hotspot-marker">6</div>
+                            <div class="hotspot-tooltip">Getting Started Guide</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="laptop-base"></div>
+            </div>
+        </div>
+
+        <!-- Separate explanation panel -->
+        <div class="explanation-container">
+            <div class="explanation-panel">
+                <div class="explanation-content">
+                    <h3 id="explanation-title">Welcome to Azure AI Foundry</h3>
+                    <p id="explanation-text">
+                        Click on any numbered hotspot above to learn about that feature. Azure AI Foundry is Microsoft's comprehensive platform for building, deploying, and managing AI applications.
+                    </p>
+                    <div class="navigation-buttons">
+                        <button id="prev-btn" disabled>← Previous</button>
+                        <button id="next-btn">Next →</button>
+                        <button id="reset-btn">Reset Tour</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Progress indicator -->
+        <div class="progress-container">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
+            <span class="progress-text">
+                <span id="current-step">0</span> of <span id="total-steps">6</span> features explored
+            </span>
+        </div>
+    </main>
+
+    <footer>
+        <p>Interactive tutorial for Azure AI Foundry interface components</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,429 @@
+/* K-Means Clustering Phases Interactive Styles */
+:root {
+    --bg-neutral: #F8F9FA;
+    --blue-primary: #0066CC;
+    --orange-accent: #FF6B35;
+    --green-accent: #4CAF50;
+    --purple-accent: #9C27B0;
+    --text-dark: #323130;
+    --text-light: #605e5c;
+    --white: #ffffff;
+    --shadow: rgba(0, 0, 0, 0.1);
+    --border-radius: 8px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-neutral);
+    color: var(--text-dark);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header Styles */
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    background: var(--white);
+    padding: 30px 20px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 12px var(--shadow);
+}
+
+header h1 {
+    color: var(--blue-primary);
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+header p {
+    color: var(--text-light);
+    font-size: 1.1rem;
+}
+
+/* Main Diagram Container */
+.diagram-container {
+    background: var(--white);
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 12px var(--shadow);
+    padding: 30px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Image Container */
+.image-container {
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cluster-image {
+    max-width: 100%;
+    max-height: 500px;
+    width: auto;
+    height: auto;
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 8px var(--shadow);
+    transition: opacity 0.3s ease;
+}
+
+/* Controls */
+.controls {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+
+.control-buttons {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.control-btn {
+    background: var(--blue-primary);
+    color: var(--white);
+    border: none;
+    padding: 12px 20px;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px var(--shadow);
+}
+
+.control-btn:hover {
+    background: #0052A3;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px var(--shadow);
+}
+
+.control-btn:active {
+    transform: translateY(0);
+}
+
+.control-btn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* Enhanced Progress Bar */
+.progress-container {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.progress-bar {
+    position: relative;
+    background: #e0e0e0;
+    height: 8px;
+    border-radius: 4px;
+    margin: 10px 0;
+    overflow: visible;
+}
+
+.progress-fill {
+    background: var(--blue-primary);
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.4s ease;
+    width: 0%; /* Start at 0, will be calculated based on completed steps */
+}
+
+.progress-dots {
+    position: absolute;
+    top: -8px;
+    left: 0;
+    right: 0;
+    height: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.progress-dot {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #e0e0e0;
+    border: 3px solid var(--white);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: bold;
+    color: var(--white);
+    box-shadow: 0 2px 4px var(--shadow);
+}
+
+.progress-dot:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 8px var(--shadow);
+}
+
+.progress-dot.active {
+    background: var(--blue-primary);
+    color: var(--white);
+}
+
+.progress-dot.completed {
+    background: var(--green-accent);
+    color: var(--white);
+}
+
+.progress-dot::after {
+    content: attr(data-step);
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 10px;
+    color: var(--text-light);
+    white-space: nowrap;
+}
+
+/* Step Information Panel - Now Above Image */
+.step-info-panel {
+    background: var(--white);
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 12px var(--shadow);
+    padding: 25px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.step-header {
+    margin-bottom: 15px;
+}
+
+.step-header span {
+    display: inline-block;
+    background: var(--blue-primary);
+    color: var(--white);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.step-header h3 {
+    color: var(--text-dark);
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+#stepDescription {
+    color: var(--text-light);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Legend */
+.legend {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    background: var(--white);
+    padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 12px var(--shadow);
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 500;
+}
+
+.legend-color {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid var(--white);
+    box-shadow: 0 2px 4px var(--shadow);
+}
+
+.centroid-color {
+    background: var(--blue-primary);
+}
+
+.cluster1-color {
+    background: var(--orange-accent);
+}
+
+.cluster2-color {
+    background: var(--green-accent);
+}
+
+.cluster3-color {
+    background: var(--purple-accent);
+}
+
+/* Info Panel */
+.info-panel {
+    background: var(--white);
+    padding: 25px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 12px var(--shadow);
+    text-align: center;
+}
+
+.info-panel h3 {
+    color: var(--blue-primary);
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.info-panel p {
+    color: var(--text-light);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+    
+    header h1 {
+        font-size: 2rem;
+    }
+    
+    header p {
+        font-size: 1rem;
+    }
+    
+    .diagram-container {
+        padding: 20px;
+    }
+    
+    .control-buttons {
+        gap: 10px;
+    }
+    
+    .control-btn {
+        padding: 10px 15px;
+        font-size: 0.9rem;
+    }
+    
+    .legend {
+        gap: 20px;
+        padding: 15px;
+    }
+    
+    .step-header h3 {
+        font-size: 1.5rem;
+    }
+    
+    #stepDescription {
+        font-size: 1rem;
+    }
+    
+    .progress-dots {
+        top: -6px;
+    }
+    
+    .progress-dot {
+        width: 20px;
+        height: 20px;
+        font-size: 10px;
+    }
+    
+    .progress-dot::after {
+        font-size: 9px;
+        top: 25px;
+    }
+}
+
+@media (max-width: 480px) {
+    .control-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .control-btn {
+        width: 200px;
+    }
+    
+    .legend {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+    
+    .progress-dot {
+        width: 16px;
+        height: 16px;
+        font-size: 8px;
+    }
+    
+    .progress-dot::after {
+        font-size: 8px;
+        top: 20px;
+    }
+}
+
+/* Animation Classes */
+.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.slide-in {
+    animation: slideIn 0.4s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}

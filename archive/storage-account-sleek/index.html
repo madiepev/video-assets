@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Azure Storage Account - Premium Guide</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app">
+        <div class="sidebar">
+            <div class="logo">
+                <div class="logo-icon"></div>
+                <span>Azure Storage</span>
+            </div>
+            <nav class="nav-steps">
+                <div class="nav-item active" data-step="1">
+                    <div class="nav-number">1</div>
+                    <span>Storage Account</span>
+                </div>
+                <div class="nav-item" data-step="2">
+                    <div class="nav-number">2</div>
+                    <span>Performance Tiers</span>
+                </div>
+                <div class="nav-item" data-step="3">
+                    <div class="nav-number">3</div>
+                    <span>Storage Services</span>
+                </div>
+                <div class="nav-item" data-step="4">
+                    <div class="nav-number">4</div>
+                    <span>Blob Containers</span>
+                </div>
+                <div class="nav-item" data-step="5">
+                    <div class="nav-number">5</div>
+                    <span>Blob Types</span>
+                </div>
+                <div class="nav-item" data-step="6">
+                    <div class="nav-number">6</div>
+                    <span>Access Tiers</span>
+                </div>
+                <div class="nav-item" data-step="7">
+                    <div class="nav-number">7</div>
+                    <span>Overview</span>
+                </div>
+            </nav>
+            <div class="progress-sidebar">
+                <div class="progress-text">Progress</div>
+                <div class="progress-circle">
+                    <svg viewBox="0 0 36 36">
+                        <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                        <path class="circle-progress" id="progress-circle" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                    </svg>
+                    <div class="progress-number" id="progress-number">14%</div>
+                </div>
+            </div>
+        </div>
+
+        <main class="main-content">
+            <div class="content-container">
+                <!-- Step 1 -->
+                <section class="step-content active" id="content-1">
+                    <div class="step-header">
+                        <h1>Azure Storage Account</h1>
+                        <p>A globally unique namespace that provides secure, highly available, and massively scalable cloud storage.</p>
+                    </div>
+                    <div class="visual-container">
+                        <div class="storage-account-visual">
+                            <div class="cloud-container">
+                                <div class="cloud-shape"></div>
+                                <div class="account-details">
+                                    <h3>Storage Account</h3>
+                                    <div class="url-display">mystorageaccount.core.windows.net</div>
+                                    <div class="features">
+                                        <span class="feature">Globally Unique</span>
+                                        <span class="feature">Highly Available</span>
+                                        <span class="feature">Secure</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Step 2 -->
+                <section class="step-content" id="content-2">
+                    <div class="step-header">
+                        <h1>Performance Tiers</h1>
+                        <p>Choose the optimal performance tier based on your workload requirements and budget constraints.</p>
+                    </div>
+                    <div class="visual-container">
+                        <div class="performance-comparison">
+                            <div class="tier-card standard">
+                                <div class="tier-icon">💎</div>
+                                <h3>Standard</h3>
+                                <div class="tier-specs">
+                                    <div class="spec">HDD/SSD Storage</div>
+                                    <div class="spec">Cost Optimized</div>
+                                    <div class="spec">General Purpose</div>
+                                </div>
+                                <div class="tier-price">$0.018/GB</div>
+                            </div>
+                            <div class="tier-card premium">
+                                <div class="tier-icon">⚡</div>
+                                <h3>Premium</h3>
+                                <div class="tier-specs">
+                                    <div class="spec">SSD Storage Only</div>
+                                    <div class="spec">High Performance</div>
+                                    <div class="spec">Low Latency</div>
+                                </div>
+                                <div class="tier-price">$0.15/GB</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Step 3 -->
+                <section class="step-content" id="content-3">
+                    <div class="step-header">
+                        <h1>Storage Services</h1>
+                        <p>Four comprehensive services to handle any data storage scenario in the cloud.</p>
+                    </div>
+                    <div class="visual-container">
+                        <div class="services-grid">
+                            <div class="service-card blob">
+                                <div class="service-icon">📦</div>
+                                <h3>Blob Storage</h3>
+                                <p>Object storage for unstructured data</p>
+                                <div class="service-uses">Images, Videos, Documents, Backups</div>
+                            </div>
+                            <div class="service-card files">
+                                <div class="service-icon">📁</div>
+                                <h3>File Shares</h3>
+                                <p>Fully managed cloud file shares</p>
+                                <div class="service-uses">SMB/NFS, Cross-platform</div>
+                            </div>
+                            <div class="service-card queues">
+                                <div class="service-icon">📬</div>
+                                <h3>Queue Storage</h3>
+                                <p>Reliable message queuing service</p>
+                                <div class="service-uses">Async Processing, Decoupling</div>
+                            </div>
+                            <div class="service-card tables">
+                                <div class="service-icon">📊</div>
+                                <h3>Table Storage</h3>
+                                <p>NoSQL key-value store</p>
+                                <div class="service-uses">Structured Data, Fast Queries</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Step 4 -->
+                <section class="step-content" id="content-4">
+                    <div class="step-header">
+                        <h1>Blob Containers</h1>
+                        <p>Logical organization units that group related blobs together with shared access policies.</p>
+                    </div>
+                    <div class="visual-container">
+                        <div class="container-structure">
+                            <div class="blob-service-focus">
+                                <div class="service-header">
+                                    <div class="service-icon">📦</div>
+                                    <h3>Blob Storage</h3>
+                                </div>
+                                <div class="containers-tree">
+                                    <div class="container-node">
+                                        <div class="folder-icon">📁</div>
+                                        <span>images</span>
+                                        <div class="container-stats">2.3GB • Public</div>
+                                    </div>
+                                    <div class="container-node">
+                                        <div class="folder-icon">📁</div>
+                                        <span>documents</span>
+                                        <div class="container-stats">856MB • Private</div>
+                                    </div>
+                                    <div class="container-node">
+                                        <div class="folder-icon">📁</div>
+                                        <span>backups</span>
+                                        <div class="container-stats">15.7GB • Archive</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Step 5 -->
+                <section class="step-content" id="content-5">
+                    <div class="step-header">
+                        <h1>Blob Types</h1>
+                        <p>Three specialized blob types optimized for different storage patterns and access methods.</p>
+                    </div>
+                    <div class="visual-container">
+                        <div class="blob-types-showcase">
+                            <div class="blob-type-card block">
+                                <div class="blob-icon">🧱</div>
+                                <h3>Block Blobs</h3>
+                                <p>Optimized for uploading large amounts of unstructured data</p>
+                                <div class="blob-details">
+                                    <div class="detail">Max: 4.75TB</div>
+                                    <div class="detail">Use: Media files, documents</div>
+                                </div>
+                            </div>
+                            <div class="blob-type-card page">
+                                <div class="blob-icon">📄</div>
+                                <h3>Page Blobs</h3>
+                                <p>Optimized for random read/write operations</p>
+                                <div class="blob-details">
+                                    <div class="detail">Max: 8TB</div>
+                                    <div class="detail">Use: VHD files, databases</div>
+                                </div>
+                            </div>
+                            <div class="blob-type-card append">
+                                <div class="blob-icon">📝</div>
+                                <h3>Append Blobs</h3>
+                                <p>Optimized for append operations</p>
+                                <div class="blob-details">
+                                    <div class="detail">Max: 195GB</div>
+                                    <div class="detail">Use: Log files, streaming</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Step 6 -->
+                <section class="step-content" id="content-6">
+                    <div class="step-header">
+                        <h1>Access Tiers</h1>
+                        <p>Intelligent tiering system that balances cost and performance based on access patterns.</p>
+                    </div>
+                    <div class="visual-container">
+                        <div class="tiers-timeline">
+                            <div class="tier-milestone hot">
+                                <div class="tier-icon">🔥</div>
+                                <h3>Hot</h3>
+                                <div class="tier-info">
+                                    <div class="access-pattern">Frequent Access</div>
+                                    <div class="cost-info">Higher storage cost, Lower access cost</div>
+                                </div>
+                            </div>
+                            <div class="tier-milestone cool">
+                                <div class="tier-icon">❄️</div>
+                                <h3>Cool</h3>
+                                <div class="tier-info">
+                                    <div class="access-pattern">30+ days infrequent</div>
+                                    <div class="cost-info">Lower storage cost, Higher access cost</div>
+                                </div>
+                            </div>
+                            <div class="tier-milestone cold">
+                                <div class="tier-icon">🧊</div>
+                                <h3>Cold</h3>
+                                <div class="tier-info">
+                                    <div class="access-pattern">90+ days rare access</div>
+                                    <div class="cost-info">Even lower storage cost</div>
+                                </div>
+                            </div>
+                            <div class="tier-milestone archive">
+                                <div class="tier-icon">📦</div>
+                                <h3>Archive</h3>
+                                <div class="tier-info">
+                                    <div class="access-pattern">180+ days offline</div>
+                                    <div class="cost-info">Lowest storage cost, Hours to access</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Step 7 -->
+                <section class="step-content" id="content-7">
+                    <div class="step-header">
+                        <h1>Complete Architecture</h1>
+                        <p>Your comprehensive Azure Storage Account solution with enterprise-grade capabilities.</p>
+                    </div>
+                    <div class="visual-container">
+                        <div class="architecture-overview">
+                            <div class="overview-center">
+                                <div class="storage-account-hub">
+                                    <h3>Storage Account</h3>
+                                    <div class="hub-stats">
+                                        <div class="stat">99.9% SLA</div>
+                                        <div class="stat">Global Scale</div>
+                                        <div class="stat">Enterprise Security</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="overview-rings">
+                                <div class="ring services">
+                                    <div class="ring-item">Blob</div>
+                                    <div class="ring-item">Files</div>
+                                    <div class="ring-item">Queues</div>
+                                    <div class="ring-item">Tables</div>
+                                </div>
+                                <div class="ring features">
+                                    <div class="ring-item">Standard/Premium</div>
+                                    <div class="ring-item">Hot/Cool/Cold/Archive</div>
+                                    <div class="ring-item">Block/Page/Append</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <div class="navigation-controls">
+                <button id="prev-step" class="nav-control" disabled>
+                    <span>←</span>
+                    <div class="control-text">Previous</div>
+                </button>
+                <div class="step-dots">
+                    <div class="dot active"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+                <button id="next-step" class="nav-control">
+                    <div class="control-text">Next</div>
+                    <span>→</span>
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Low-Fidelity Interactive Wireframe</title>
+    <link rel="stylesheet" href="wireframe.css">
+</head>
+<body>
+    <div class="wireframe-container">
+        <!-- Header Section -->
+        <header class="wireframe-header">
+            <div class="logo-placeholder">[LOGO]</div>
+            <h1>Interactive UI Explorer - Wireframe</h1>
+            <div class="instructions">Click on numbered areas to explore components</div>
+        </header>
+        
+        <!-- Main Interface Mockup -->
+        <div class="interface-mockup">
+            <!-- Top Navigation Bar -->
+            <div class="nav-bar">
+                <div class="nav-item nav-app-switcher" data-hotspot="1">
+                    <div class="hotspot-number">1</div>
+                    <div class="placeholder-box">App Switcher</div>
+                </div>
+                
+                <div class="nav-item nav-search" data-hotspot="2">
+                    <div class="hotspot-number">2</div>
+                    <div class="placeholder-box search-box">Search Bar</div>
+                </div>
+                
+                <div class="nav-item nav-account" data-hotspot="3">
+                    <div class="hotspot-number">3</div>
+                    <div class="placeholder-box">Account Info</div>
+                </div>
+            </div>
+            
+            <!-- Main Content Area -->
+            <div class="main-content">
+                <!-- Sidebar -->
+                <div class="sidebar">
+                    <div class="sidebar-section" data-hotspot="4">
+                        <div class="hotspot-number">4</div>
+                        <div class="placeholder-box">
+                            <div class="section-title">Browse</div>
+                            <div class="list-item">Recent Items</div>
+                            <div class="list-item">Favorites</div>
+                            <div class="list-item">Shared</div>
+                        </div>
+                    </div>
+                    
+                    <div class="sidebar-section" data-hotspot="5">
+                        <div class="hotspot-number">5</div>
+                        <div class="placeholder-box">
+                            <div class="section-title">Workspaces</div>
+                            <div class="list-item">Personal</div>
+                            <div class="list-item">Team Alpha</div>
+                            <div class="list-item">Project Beta</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Content Area -->
+                <div class="content-area">
+                    <div class="content-header" data-hotspot="6">
+                        <div class="hotspot-number">6</div>
+                        <div class="placeholder-box">
+                            <div class="breadcrumbs">[Home] > [Workspace] > [Current View]</div>
+                        </div>
+                    </div>
+                    
+                    <div class="content-grid">
+                        <div class="grid-item" data-hotspot="7">
+                            <div class="hotspot-number">7</div>
+                            <div class="placeholder-box">
+                                <div class="item-icon">[📄]</div>
+                                <div class="item-title">Notebook 1</div>
+                                <div class="item-meta">Last modified: 2 hours ago</div>
+                            </div>
+                        </div>
+                        
+                        <div class="grid-item">
+                            <div class="placeholder-box">
+                                <div class="item-icon">[📊]</div>
+                                <div class="item-title">Report 1</div>
+                                <div class="item-meta">Created: Yesterday</div>
+                            </div>
+                        </div>
+                        
+                        <div class="grid-item">
+                            <div class="placeholder-box">
+                                <div class="item-icon">[⚙️]</div>
+                                <div class="item-title">Pipeline 1</div>
+                                <div class="item-meta">Status: Running</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right Panel -->
+                <div class="right-panel" data-hotspot="8">
+                    <div class="hotspot-number">8</div>
+                    <div class="placeholder-box">
+                        <div class="section-title">Context Panel</div>
+                        <div class="context-item">Properties</div>
+                        <div class="context-item">History</div>
+                        <div class="context-item">Settings</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Bottom Experience Selector -->
+            <div class="experience-bar" data-hotspot="9">
+                <div class="hotspot-number">9</div>
+                <div class="placeholder-box">
+                    <div class="experience-item active">Data Engineering</div>
+                    <div class="experience-item">Data Science</div>
+                    <div class="experience-item">Power BI</div>
+                    <div class="experience-item">Real-Time Analytics</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Information Panel -->
+        <div class="info-panel" id="infoPanel">
+            <div class="panel-header">
+                <h3 id="panelTitle">Component Information</h3>
+                <button class="close-btn" id="closeBtn">×</button>
+            </div>
+            <div class="panel-content" id="panelContent">
+                <!-- Content will be populated by JavaScript -->
+            </div>
+        </div>
+        
+        <!-- Overlay -->
+        <div class="overlay" id="overlay"></div>
+        
+        <!-- Legend -->
+        <div class="wireframe-legend">
+            <h3>Wireframe Legend</h3>
+            <div class="legend-item">
+                <div class="legend-number">1-9</div>
+                <span>Interactive hotspots - click to explore</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box"></div>
+                <span>UI component placeholder</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-text">[TEXT]</div>
+                <span>Content placeholder</span>
+            </div>
+        </div>
+    </div>
+    
+    <script src="wireframe.js"></script>
+</body>
+</html>

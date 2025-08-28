@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K-Means Clustering Interactive Phases</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>K-Means Clustering Algorithm Phases</h1>
+            <p>Step-by-step visualization of unsupervised clustering</p>
+        </header>
+        
+        <!-- Step Information Panel (Above Image) -->
+        <div class="step-info-panel">
+            <div class="step-header">
+                <span id="stepCounter">Step 1 of 6</span>
+                <h3 id="stepTitle">Initial Data Points</h3>
+            </div>
+            <p id="stepDescription">Display unclustered data points scattered across the coordinate space, waiting to be grouped into meaningful clusters.</p>
+        </div>
+
+        <div class="diagram-container">
+            <!-- Image Display Area -->
+            <div class="image-container">
+                <img id="clusterImage" src="images/clustering-1.png" alt="Clustering Phase 1" class="cluster-image">
+            </div>
+            
+            <!-- Control Panel -->
+            <div class="controls">
+                <div class="control-buttons">
+                    <button id="playPauseBtn" class="control-btn">
+                        <span id="playPauseIcon">⏸️</span> Pause
+                    </button>
+                    <button id="prevBtn" class="control-btn">⏮️ Previous</button>
+                    <button id="nextBtn" class="control-btn">Next ⏭️</button>
+                    <button id="resetBtn" class="control-btn">🔄 Reset</button>
+                </div>
+                
+                <!-- Enhanced Progress Bar with Dots -->
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div id="progressFill" class="progress-fill"></div>
+                        <div class="progress-dots">
+                            <div class="progress-dot active" data-step="1"></div>
+                            <div class="progress-dot" data-step="2"></div>
+                            <div class="progress-dot" data-step="3"></div>
+                            <div class="progress-dot" data-step="4"></div>
+                            <div class="progress-dot" data-step="5"></div>
+                            <div class="progress-dot" data-step="6"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="info-panel">
+            <h3>About K-Means Clustering</h3>
+            <p>K-Means is an unsupervised machine learning algorithm that groups data points into clusters. 
+               The algorithm iteratively refines cluster assignments until convergence is reached. Use the controls above to step through each phase of the algorithm.</p>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

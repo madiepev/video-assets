@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Fabric Interface Explorer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Understanding Microsoft Fabric Interface</h1>
+            <p>Click on highlighted areas to learn more about each component</p>
+        </header>
+        
+        <div class="interface-container">
+            <!-- Main interface image -->
+            <div class="interface-wrapper">
+                <img src="fabric-notes.png" alt="Microsoft Fabric Interface" class="interface-image" id="interfaceImage">
+                
+                <!-- Interactive hotspots -->
+                <div class="hotspot hotspot-app-switcher" data-info="app-switcher">
+                    <div class="hotspot-indicator"></div>
+                </div>
+                
+                <div class="hotspot hotspot-search" data-info="search">
+                    <div class="hotspot-indicator"></div>
+                </div>
+                
+                <div class="hotspot hotspot-trial" data-info="trial">
+                    <div class="hotspot-indicator"></div>
+                </div>
+                
+                <div class="hotspot hotspot-browse" data-info="browse">
+                    <div class="hotspot-indicator"></div>
+                </div>
+                
+                <div class="hotspot hotspot-workspaces" data-info="workspaces">
+                    <div class="hotspot-indicator"></div>
+                </div>
+                
+                <div class="hotspot hotspot-artifacts" data-info="artifacts">
+                    <div class="hotspot-indicator"></div>
+                </div>
+                
+                <div class="hotspot hotspot-experiences" data-info="experiences">
+                    <div class="hotspot-indicator"></div>
+                </div>
+                
+                <div class="hotspot hotspot-ui-context" data-info="ui-context">
+                    <div class="hotspot-indicator"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Information panels -->
+        <div class="info-panel" id="infoPanel">
+            <div class="info-content">
+                <button class="close-btn" id="closeBtn">&times;</button>
+                <div class="info-details" id="infoDetails">
+                    <!-- Content will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+        
+        <!-- Legend -->
+        <div class="legend">
+            <h3>Interactive Elements</h3>
+            <div class="legend-item">
+                <div class="legend-indicator active"></div>
+                <span>Click on pulsing indicators to learn more</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-indicator"></div>
+                <span>Hover over areas for preview</span>
+            </div>
+        </div>
+        
+        <!-- Tips section -->
+        <div class="tips-section">
+            <h3>Navigation Tips</h3>
+            <ol>
+                <li>Select the right context <strong>before</strong> choosing a workspace</li>
+                <li>Pin your most-used workspaces</li>
+                <li>Favorite the artifacts you're working on to easily find them in "Browse"</li>
+            </ol>
+        </div>
+    </div>
+    
+    <!-- Overlay for modal -->
+    <div class="overlay" id="overlay"></div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

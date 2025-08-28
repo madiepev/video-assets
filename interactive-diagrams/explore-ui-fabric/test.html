@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Fabric Explorer - Test Page</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .test-results {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .test-item {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            padding: 8px;
+            border-radius: 4px;
+        }
+        .test-pass {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+        }
+        .test-fail {
+            background: #f8d7da;
+            border-left: 4px solid #dc3545;
+        }
+        .test-icon {
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        .launch-btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin: 10px 5px;
+        }
+        .launch-btn:hover {
+            background: #0056b3;
+        }
+        .info-box {
+            background: #e7f3ff;
+            border: 1px solid #b3d7ff;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧪 Interactive Fabric Explorer - Test Suite</h1>
+    
+    <div class="info-box">
+        <h3>📋 Pre-Launch Checklist</h3>
+        <p>This page verifies that all components are properly configured before deployment.</p>
+    </div>
+
+    <div class="test-results">
+        <h3>🔍 File Validation</h3>
+        <div id="fileTests">
+            <!-- Will be populated by JavaScript -->
+        </div>
+    </div>
+
+    <div class="test-results">
+        <h3>🎯 Functionality Tests</h3>
+        <div id="funcTests">
+            <!-- Will be populated by JavaScript -->
+        </div>
+    </div>
+
+    <div class="test-results">
+        <h3>📱 Responsiveness Check</h3>
+        <div id="responsiveTests">
+            <!-- Will be populated by JavaScript -->
+        </div>
+    </div>
+
+    <div style="text-align: center; margin: 40px 0;">
+        <a href="index.html" class="launch-btn">🚀 Launch Interactive Explorer</a>
+        <a href="https://github.com/your-username/your-repo" class="launch-btn" style="background: #28a745;">📖 View Documentation</a>
+    </div>
+
+    <div class="info-box">
+        <h3>🔧 Quick Fixes</h3>
+        <ul>
+            <li><strong>Missing Image:</strong> Ensure <code>fabric-notes.png</code> is in the same directory</li>
+            <li><strong>Hotspots Not Working:</strong> Check browser console for JavaScript errors</li>
+            <li><strong>Styling Issues:</strong> Verify CSS file is properly linked</li>
+            <li><strong>Mobile Problems:</strong> Test viewport meta tag configuration</li>
+        </ul>
+    </div>
+
+    <script>
+        // Test data structure
+        const tests = {
+            files: [
+                { name: 'index.html', required: true, description: 'Main HTML file' },
+                { name: 'styles.css', required: true, description: 'CSS stylesheet' },
+                { name: 'script.js', required: true, description: 'JavaScript functionality' },
+                { name: 'fabric-notes.png', required: true, description: 'Interface screenshot' },
+                { name: 'config.json', required: false, description: 'Configuration file' },
+                { name: 'README.md', required: false, description: 'Documentation' }
+            ],
+            functionality: [
+                { name: 'CSS Loading', test: () => getComputedStyle(document.body).fontFamily },
+                { name: 'Responsive Design', test: () => window.innerWidth > 0 },
+                { name: 'Local Storage', test: () => typeof(Storage) !== "undefined" },
+                { name: 'Touch Events', test: () => 'ontouchstart' in window },
+                { name: 'Service Worker', test: () => 'serviceWorker' in navigator }
+            ],
+            responsive: [
+                { breakpoint: 'Mobile (≤768px)', test: () => checkMediaQuery('(max-width: 768px)') },
+                { breakpoint: 'Tablet (769-1024px)', test: () => checkMediaQuery('(min-width: 769px) and (max-width: 1024px)') },
+                { breakpoint: 'Desktop (≥1025px)', test: () => checkMediaQuery('(min-width: 1025px)') }
+            ]
+        };
+
+        // Helper function to check media queries
+        function checkMediaQuery(query) {
+            return window.matchMedia(query).matches;
+        }
+
+        // Helper function to check if file exists
+        async function fileExists(filename) {
+            try {
+                const response = await fetch(filename, { method: 'HEAD' });
+                return response.ok;
+            } catch {
+                return false;
+            }
+        }
+
+        // Create test result element
+        function createTestElement(passed, text, description = '') {
+            const div = document.createElement('div');
+            div.className = `test-item ${passed ? 'test-pass' : 'test-fail'}`;
+            
+            const icon = document.createElement('span');
+            icon.className = 'test-icon';
+            icon.textContent = passed ? '✓' : '✗';
+            
+            const content = document.createElement('span');
+            content.innerHTML = `<strong>${text}</strong>${description ? ` - ${description}` : ''}`;
+            
+            div.appendChild(icon);
+            div.appendChild(content);
+            
+            return div;
+        }
+
+        // Run file tests
+        async function runFileTests() {
+            const container = document.getElementById('fileTests');
+            
+            for (const file of tests.files) {
+                const exists = await fileExists(file.name);
+                const element = createTestElement(
+                    exists || !file.required, 
+                    file.name, 
+                    file.description + (file.required ? ' (Required)' : ' (Optional)')
+                );
+                container.appendChild(element);
+            }
+        }
+
+        // Run functionality tests
+        function runFunctionalityTests() {
+            const container = document.getElementById('funcTests');
+            
+            tests.functionality.forEach(test => {
+                try {
+                    const result = test.test();
+                    const passed = result !== null && result !== undefined && result !== false;
+                    const element = createTestElement(passed, test.name, passed ? 'Available' : 'Not Available');
+                    container.appendChild(element);
+                } catch (error) {
+                    const element = createTestElement(false, test.name, 'Error: ' + error.message);
+                    container.appendChild(element);
+                }
+            });
+        }
+
+        // Run responsive tests
+        function runResponsiveTests() {
+            const container = document.getElementById('responsiveTests');
+            
+            tests.responsive.forEach(test => {
+                const passed = test.test();
+                const element = createTestElement(passed, test.breakpoint, passed ? 'Active' : 'Inactive');
+                container.appendChild(element);
+            });
+        }
+
+        // Initialize tests when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            runFileTests();
+            runFunctionalityTests();
+            runResponsiveTests();
+            
+            // Update responsive tests on resize
+            window.addEventListener('resize', () => {
+                const container = document.getElementById('responsiveTests');
+                container.innerHTML = '';
+                runResponsiveTests();
+            });
+        });
+
+        // Add some styling for better UX
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add animation to test items
+            setTimeout(() => {
+                document.querySelectorAll('.test-item').forEach((item, index) => {
+                    item.style.opacity = '0';
+                    item.style.transform = 'translateY(20px)';
+                    item.style.transition = 'all 0.3s ease';
+                    
+                    setTimeout(() => {
+                        item.style.opacity = '1';
+                        item.style.transform = 'translateY(0)';
+                    }, index * 100);
+                });
+            }, 100);
+        });
+    </script>
+</body>
+</html>

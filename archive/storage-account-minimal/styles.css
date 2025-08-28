@@ -1,0 +1,404 @@
+/* Microsoft Learn PowerPoint Theme Colors */
+:root {
+    /* Official MS Learn PowerPoint Accent Colors */
+    --accent-1: #FF5722; /* Orange-red */
+    --accent-2: #9C27B0; /* Purple */
+    --accent-3: #FF6B35; /* Orange */
+    --accent-4: #B39DDB; /* Light purple */
+    --accent-5: #FFC107; /* Yellow */
+    --accent-6: #9E9E9E; /* Gray */
+    
+    /* Base colors */
+    --primary-white: #FFFFFF;
+    --background-light: #F8F9FA;
+    --text-dark: #212529;
+    --text-muted: #6C757D;
+    --border-color: #DEE2E6;
+}
+
+/* Minimal/Clean Style - Ultra simple, lots of white space */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+    color: var(--text-dark);
+    background: var(--primary-white);
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 60px 40px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header - Ultra minimal */
+header {
+    text-align: center;
+    margin-bottom: 80px;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    font-weight: 100;
+    color: var(--accent-1);
+    margin-bottom: 40px;
+    letter-spacing: -1px;
+}
+
+.progress {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.step-text {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-weight: 400;
+}
+
+.progress-line {
+    width: 200px;
+    height: 2px;
+    background: var(--border-color);
+    position: relative;
+}
+
+.progress-active {
+    height: 100%;
+    background: var(--accent-1);
+    width: 14.28%;
+    transition: width 0.4s ease;
+}
+
+/* Main content - Spacious and clean */
+main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.step {
+    display: none;
+    text-align: center;
+    max-width: 600px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s ease;
+}
+
+.step.active {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.step h2 {
+    font-size: 2rem;
+    font-weight: 200;
+    color: var(--text-dark);
+    margin-bottom: 20px;
+}
+
+.step p {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    margin-bottom: 60px;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Visual elements - Very minimal */
+.visual-minimal {
+    margin: 40px 0;
+}
+
+.account-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 30px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background: var(--background-light);
+}
+
+.icon {
+    font-size: 2rem;
+    color: var(--accent-1);
+    font-weight: 100;
+}
+
+.account-box span {
+    font-family: 'Courier New', monospace;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.tier-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.tier {
+    text-align: center;
+    padding: 30px 20px;
+    border: 1px solid var(--border-color);
+    background: var(--primary-white);
+}
+
+.tier:first-child {
+    border-left: 4px solid var(--accent-3);
+}
+
+.tier:last-child {
+    border-left: 4px solid var(--accent-2);
+}
+
+.tier-label {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--text-dark);
+    margin-bottom: 8px;
+}
+
+.tier-desc {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.services-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.service {
+    padding: 20px 10px;
+    text-align: center;
+    font-weight: 400;
+    color: var(--text-dark);
+    background: var(--background-light);
+}
+
+.service:nth-child(1) { border-bottom: 2px solid var(--accent-1); }
+.service:nth-child(2) { border-bottom: 2px solid var(--accent-2); }
+.service:nth-child(3) { border-bottom: 2px solid var(--accent-3); }
+.service:nth-child(4) { border-bottom: 2px solid var(--accent-4); }
+
+.container-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+.container-item {
+    padding: 15px 20px;
+    text-align: center;
+    border: 1px solid var(--border-color);
+    background: var(--primary-white);
+    font-family: 'Courier New', monospace;
+    color: var(--text-muted);
+}
+
+.container-item:nth-child(1) { border-left: 4px solid var(--accent-1); }
+.container-item:nth-child(2) { border-left: 4px solid var(--accent-2); }
+.container-item:nth-child(3) { border-left: 4px solid var(--accent-3); }
+
+.blob-types {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.blob-type {
+    text-align: center;
+    padding: 25px 15px;
+    border: 1px solid var(--border-color);
+    background: var(--background-light);
+}
+
+.blob-type:nth-child(1) { border-top: 4px solid var(--accent-1); }
+.blob-type:nth-child(2) { border-top: 4px solid var(--accent-2); }
+.blob-type:nth-child(3) { border-top: 4px solid var(--accent-3); }
+
+.blob-type span {
+    display: block;
+    font-weight: 400;
+    color: var(--text-dark);
+    margin-bottom: 8px;
+}
+
+.blob-type small {
+    color: var(--text-muted);
+    font-size: 0.8rem;
+}
+
+.tiers-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 500px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.tiers-line::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--border-color);
+    z-index: 1;
+}
+
+.tier-point {
+    background: var(--primary-white);
+    border: 2px solid var(--accent-1);
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: var(--accent-1);
+    position: relative;
+    z-index: 2;
+}
+
+.tier-point:nth-child(2) { border-color: var(--accent-2); color: var(--accent-2); }
+.tier-point:nth-child(3) { border-color: var(--accent-3); color: var(--accent-3); }
+.tier-point:nth-child(4) { border-color: var(--accent-6); color: var(--accent-6); }
+
+.overview-summary {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.summary-item {
+    text-align: center;
+    padding: 25px 20px;
+    background: var(--background-light);
+    font-weight: 400;
+    color: var(--text-dark);
+}
+
+.summary-item:nth-child(1) { border-left: 4px solid var(--accent-1); }
+.summary-item:nth-child(2) { border-left: 4px solid var(--accent-2); }
+.summary-item:nth-child(3) { border-left: 4px solid var(--accent-3); }
+.summary-item:nth-child(4) { border-left: 4px solid var(--accent-4); }
+
+/* Controls - Minimal buttons */
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 60px;
+}
+
+button {
+    background: none;
+    border: 1px solid var(--border-color);
+    padding: 12px 30px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: var(--text-dark);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button:hover:not(:disabled) {
+    border-color: var(--accent-1);
+    color: var(--accent-1);
+}
+
+button:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+#next {
+    background: var(--accent-1);
+    color: var(--primary-white);
+    border-color: var(--accent-1);
+}
+
+#next:hover:not(:disabled) {
+    background: color-mix(in srgb, var(--accent-1) 90%, black);
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .container {
+        padding: 40px 20px;
+    }
+    
+    header h1 {
+        font-size: 2rem;
+    }
+    
+    .step h2 {
+        font-size: 1.5rem;
+    }
+    
+    .services-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .blob-types {
+        grid-template-columns: 1fr;
+    }
+    
+    .tier-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .tiers-line {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .tiers-line::before {
+        display: none;
+    }
+    
+    .overview-summary {
+        grid-template-columns: 1fr;
+    }
+    
+    .controls {
+        gap: 20px;
+    }
+}
